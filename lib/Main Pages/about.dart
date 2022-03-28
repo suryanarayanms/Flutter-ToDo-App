@@ -42,7 +42,7 @@ class _AboutPageState extends State<AboutPage> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (context) => TodoPage(),
                     ));
                   },
@@ -131,26 +131,29 @@ class _AboutPageState extends State<AboutPage> {
                         onPressed: () {
                           launch('https://github.com/suryanarayanms');
                         },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image(
-                                height: 25,
-                                image: AssetImage('assets/github_icon_2.png')),
-                            SizedBox(width: 7),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width / 4,
-                              child: Text(
-                                'Github',
-                                style: GoogleFonts.spartan(
-                                    textStyle: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 17,
-                                )),
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image(
+                                  height: 25,
+                                  image:
+                                      AssetImage('assets/github_icon_2.png')),
+                              SizedBox(width: 7),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width / 4,
+                                child: Text(
+                                  'Github',
+                                  style: GoogleFonts.spartan(
+                                      textStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 17,
+                                  )),
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                       SizedBox(height: 10),
@@ -189,28 +192,30 @@ class _AboutPageState extends State<AboutPage> {
                           );
                           launch(emailLaunchUri.toString());
                         },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.mail_outline_outlined,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                            SizedBox(width: 7),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width / 4,
-                              child: Text(
-                                'Contact Us',
-                                style: GoogleFonts.spartan(
-                                    textStyle: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                )),
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.mail_outline_outlined,
+                                color: Colors.white,
+                                size: 20,
                               ),
-                            ),
-                          ],
+                              SizedBox(width: 7),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width / 4,
+                                child: Text(
+                                  'Contact Us',
+                                  style: GoogleFonts.spartan(
+                                      textStyle: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  )),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],
