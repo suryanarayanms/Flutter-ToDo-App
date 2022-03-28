@@ -1,3 +1,5 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:todo_app/Main%20Pages/ToDo/todopage.dart';
@@ -7,7 +9,10 @@ void main() async {
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-  runApp(const MyApp());
+  runApp(DevicePreview(
+    builder: (context) => const MyApp(),
+    enabled: !kReleaseMode,
+  ));
 }
 
 class MyApp extends StatelessWidget {
