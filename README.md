@@ -1,5 +1,5 @@
 # ToDo App
-An handy ToDo app made with flutter
+A handy ToDo app made with flutter
 # What's Special
 - Unlimited ToDo's
 - Unlimited Checklist with optional description
