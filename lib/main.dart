@@ -9,10 +9,15 @@ void main() async {
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-  runApp(DevicePreview(
-    builder: (context) => const MyApp(),
-    enabled: !kReleaseMode,
-  ));
+  runApp(
+    // DevicePreview(
+    // builder: (context) =>
+
+    const MyApp(),
+
+    // enabled: !kReleaseMode,
+    // )
+  );
 }
 
 class MyApp extends StatelessWidget {

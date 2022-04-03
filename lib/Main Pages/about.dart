@@ -29,6 +29,13 @@ class _AboutPageState extends State<AboutPage> {
     });
   }
 
+  String? encodeQueryParameters(Map<String, String> params) {
+    return params.entries
+        .map((e) =>
+            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+        .join('&');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,7 +125,7 @@ class _AboutPageState extends State<AboutPage> {
                   child: Column(
                     children: [
                       Text(
-                        'ToDo Will Be An Open-Source Project\nAnd Can Be Found On',
+                        'ToDo Will Be An Open-Source Project And Can Be Found On',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.spartan(
                             textStyle: TextStyle(
@@ -188,7 +195,11 @@ class _AboutPageState extends State<AboutPage> {
                         onPressed: () {
                           final Uri emailLaunchUri = Uri(
                             scheme: 'mailto',
-                            path: 'suryanarayan.moola@gmail.com',
+                            path: 'loveforbutterflyeffect@gmail.com',
+                            query: encodeQueryParameters(<String, String>{
+                              'subject': 'ToDo',
+                              'body': 'Query: '
+                            }),
                           );
                           launch(emailLaunchUri.toString());
                         },
