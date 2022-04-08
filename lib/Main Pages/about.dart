@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:package_info/package_info.dart';
 import 'package:todo_app/Main%20Pages/ToDo/todopage.dart';
-import 'package:todo_app/model/todo.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutPage extends StatefulWidget {
-  AboutPage({Key? key}) : super(key: key);
+  const AboutPage({Key? key}) : super(key: key);
 
   @override
   _AboutPageState createState() => _AboutPageState();
@@ -44,16 +43,16 @@ class _AboutPageState extends State<AboutPage> {
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.only(top: 85),
+            padding: const EdgeInsets.only(top: 85),
             child: Row(
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => TodoPage(),
+                    Navigator.of(context).pop(MaterialPageRoute(
+                      builder: (context) => const TodoPage(),
                     ));
                   },
-                  child: Padding(
+                  child: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     child: Icon(
                       Icons.keyboard_arrow_left_sharp,
@@ -62,11 +61,11 @@ class _AboutPageState extends State<AboutPage> {
                     ),
                   ),
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Text(
                   'About',
                   style: GoogleFonts.spartan(
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 30,
@@ -75,7 +74,7 @@ class _AboutPageState extends State<AboutPage> {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 19,
           ),
           Expanded(
@@ -84,7 +83,7 @@ class _AboutPageState extends State<AboutPage> {
               children: [
                 Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Card(
@@ -93,18 +92,18 @@ class _AboutPageState extends State<AboutPage> {
                         borderRadius: BorderRadius.circular(100.0),
                       ),
                       clipBehavior: Clip.antiAlias,
-                      child: SizedBox(
+                      child: const SizedBox(
                         width: 150,
                         child:
                             Image(image: AssetImage('assets/ic_launcher.png')),
                       ),
                     ),
-                    SizedBox(height: 17),
+                    const SizedBox(height: 17),
                     Text(
                       'ToDo',
                       textAlign: TextAlign.center,
                       style: GoogleFonts.spartan(
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 30,
@@ -113,7 +112,7 @@ class _AboutPageState extends State<AboutPage> {
                     Text(
                       'v$appVersion',
                       style: GoogleFonts.spartan(
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                         color: Colors.white,
                       )),
                     ),
@@ -121,19 +120,19 @@ class _AboutPageState extends State<AboutPage> {
                 ),
                 // SizedBox(height: 10),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
+                  padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
                   child: Column(
                     children: [
                       Text(
                         'ToDo Will Be An Open-Source Project And Can Be Found On',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.spartan(
-                            textStyle: TextStyle(
+                            textStyle: const TextStyle(
                           color: Colors.white,
                           fontSize: 12,
                         )),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       TextButton(
                         onPressed: () {
                           launch('https://github.com/suryanarayanms');
@@ -142,17 +141,17 @@ class _AboutPageState extends State<AboutPage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image(
+                              const Image(
                                   height: 25,
                                   image:
                                       AssetImage('assets/github_icon_2.png')),
-                              SizedBox(width: 7),
+                              const SizedBox(width: 7),
                               SizedBox(
                                 width: MediaQuery.of(context).size.width / 4,
                                 child: Text(
                                   'Github',
                                   style: GoogleFonts.spartan(
-                                      textStyle: TextStyle(
+                                      textStyle: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 17,
@@ -163,12 +162,12 @@ class _AboutPageState extends State<AboutPage> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Text(
                         'Crush Over Love ❤️💫',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.spartan(
-                            textStyle: TextStyle(
+                            textStyle: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,
                         )),
@@ -178,14 +177,14 @@ class _AboutPageState extends State<AboutPage> {
                 ),
                 // SizedBox(height: 3),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
+                  padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
                   child: Column(
                     children: [
                       Text(
                         'For Queries',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.spartan(
-                            textStyle: TextStyle(
+                            textStyle: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,
                         )),
@@ -207,18 +206,18 @@ class _AboutPageState extends State<AboutPage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.mail_outline_outlined,
                                 color: Colors.white,
                                 size: 20,
                               ),
-                              SizedBox(width: 7),
+                              const SizedBox(width: 7),
                               SizedBox(
                                 width: MediaQuery.of(context).size.width / 4,
                                 child: Text(
                                   'Contact Us',
                                   style: GoogleFonts.spartan(
-                                      textStyle: TextStyle(
+                                      textStyle: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 15,
@@ -235,23 +234,20 @@ class _AboutPageState extends State<AboutPage> {
                 // Padding(padding: EdgeInsets.only(left: 17)),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(5, 30, 5, 20),
-                  child: Container(
-                    // decoration: BoxDecoration(color: Colors.blue[400]),
-                    child: Column(
-                      children: <Widget>[
-                        Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Text(
-                            'Made with ❤️ by Surya',
-                            style: GoogleFonts.spartan(
-                                textStyle: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                            )),
-                          ),
-                        )
-                      ],
-                    ),
+                  child: Column(
+                    children: <Widget>[
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Text(
+                          'Made with ❤️ by Surya',
+                          style: GoogleFonts.spartan(
+                              textStyle: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                          )),
+                        ),
+                      )
+                    ],
                   ),
                 ),
                 // Padding(

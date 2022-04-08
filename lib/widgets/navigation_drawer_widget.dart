@@ -157,7 +157,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
         break;
       case 1:
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => AboutPage(),
+          builder: (context) => const AboutPage(),
         ));
         break;
     }
