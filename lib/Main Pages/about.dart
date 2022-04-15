@@ -84,19 +84,11 @@ class _AboutPageState extends State<AboutPage> {
                 Column(
                   children: [
                     const SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
-                    Card(
-                      elevation: 15,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100.0),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: const SizedBox(
-                        width: 150,
-                        child:
-                            Image(image: AssetImage('assets/ic_launcher.png')),
-                      ),
+                    const SizedBox(
+                      width: 150,
+                      child: Image(image: AssetImage('assets/splash.png')),
                     ),
                     const SizedBox(height: 17),
                     Text(
