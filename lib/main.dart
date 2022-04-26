@@ -109,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _checkVersion() async {
-    final newVersion = NewVersion(androidId: 'com.example.todo_app');
+    final newVersion = NewVersion(androidId: 'com.ceosurya.todoapp');
     final status = await newVersion.getVersionStatus();
     newVersion.showUpdateDialog(
         context: context,
