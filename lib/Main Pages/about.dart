@@ -86,9 +86,12 @@ class _AboutPageState extends State<AboutPage> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const SizedBox(
-                      width: 150,
-                      child: Image(image: AssetImage('assets/splash.png')),
+                    const Padding(
+                      padding: EdgeInsets.only(top: 100, bottom: 8.0),
+                      child: SizedBox(
+                        width: 150,
+                        child: Image(image: AssetImage('assets/splash.png')),
+                      ),
                     ),
                     const SizedBox(height: 17),
                     Text(
@@ -115,46 +118,46 @@ class _AboutPageState extends State<AboutPage> {
                   padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
                   child: Column(
                     children: [
-                      Text(
-                        'ToDo Will Be An Open-Source Project And Can Be Found On',
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.spartan(
-                            textStyle: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
-                        )),
-                      ),
-                      const SizedBox(height: 10),
-                      TextButton(
-                        onPressed: () {
-                          launch('https://github.com/suryanarayanms');
-                        },
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Image(
-                                  height: 25,
-                                  image:
-                                      AssetImage('assets/github_icon_2.png')),
-                              const SizedBox(width: 7),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width / 4,
-                                child: Text(
-                                  'Github',
-                                  style: GoogleFonts.spartan(
-                                      textStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 17,
-                                  )),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 10),
+                      // Text(
+                      //   'ToDo Will Be An Open-Source Project And Can Be Found On',
+                      //   textAlign: TextAlign.center,
+                      //   style: GoogleFonts.spartan(
+                      //       textStyle: const TextStyle(
+                      //     color: Colors.white,
+                      //     fontSize: 12,
+                      //   )),
+                      // ),
+                      // const SizedBox(height: 10),
+                      // TextButton(
+                      //   onPressed: () {
+                      //     launch('https://github.com/suryanarayanms');
+                      //   },
+                      //   child: Center(
+                      //     child: Row(
+                      //       mainAxisAlignment: MainAxisAlignment.center,
+                      //       children: [
+                      //         const Image(
+                      //             height: 25,
+                      //             image:
+                      //                 AssetImage('assets/github_icon_2.png')),
+                      //         const SizedBox(width: 7),
+                      //         SizedBox(
+                      //           width: MediaQuery.of(context).size.width / 4,
+                      //           child: Text(
+                      //             'Github',
+                      //             style: GoogleFonts.spartan(
+                      //                 textStyle: const TextStyle(
+                      //               color: Colors.white,
+                      //               fontWeight: FontWeight.bold,
+                      //               fontSize: 17,
+                      //             )),
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+                      // const SizedBox(height: 10),
                       Text(
                         'Crush Over Love ❤️💫',
                         textAlign: TextAlign.center,
