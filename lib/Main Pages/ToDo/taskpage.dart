@@ -31,7 +31,6 @@ class _TaskPageState extends State<TaskPage> {
   @override
   void initState() {
     if (widget.task != null) {
-      //set visibility to  null
       _contentVisible = true;
       _taskTitle = widget.task?.title;
       _taskDescription = widget.task?.description;
@@ -41,13 +40,6 @@ class _TaskPageState extends State<TaskPage> {
     _titleFocus = FocusNode();
     _descriptionFocus = FocusNode();
     _todoFocus = FocusNode();
-
-    // @override
-    // void dispose() {
-    //   _titleFocus.dispose();
-    //   _descriptionFocus.dispose();
-    //   _todoFocus.dispose();
-    // }
 
     super.initState();
   }
@@ -86,9 +78,7 @@ class _TaskPageState extends State<TaskPage> {
                               autofocus: true,
                               focusNode: _titleFocus,
                               onSubmitted: (value) async {
-                                //Check if field is not empty
                                 if (value != '') {
-                                  //Check if the task is null
                                   if (widget.task == null) {
                                     Task _newTask = Task(title: value);
                                     _taskId = await _db.insertTask(_newTask);
@@ -96,11 +86,9 @@ class _TaskPageState extends State<TaskPage> {
                                       _contentVisible = true;
                                       _taskTitle = value;
                                     });
-                                    // print("New task created $_taskId");
                                   } else {
                                     await _db.updateTaskTitle(_taskId, value);
                                     _taskTitle = value;
-                                    // print("..........................");
                                   }
 
                                   _descriptionFocus.requestFocus();
@@ -173,7 +161,6 @@ class _TaskPageState extends State<TaskPage> {
                     Visibility(
                       visible: _contentVisible,
                       child: FutureBuilder(
-                        // initialData: [],
                         future: _db.getTodo(_taskId),
                         builder: (context, AsyncSnapshot snapshot) {
                           if (snapshot.hasData && snapshot.data != null) {
@@ -233,7 +220,6 @@ class _TaskPageState extends State<TaskPage> {
                                 controller: TextEditingController()..text = '',
                                 onSubmitted: (value) async {
                                   if (value != "") {
-                                    //Check if the task is null
                                     if (_taskId != 0) {
                                       DatabaseDB _db = DatabaseDB();
                                       Todo _newTodo = Todo(
@@ -287,8 +273,7 @@ class _TaskPageState extends State<TaskPage> {
                           borderRadius: BorderRadius.circular(20.0),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black
-                                  .withOpacity(0.2), //color of shadow
+                              color: Colors.black.withOpacity(0.2),
                               spreadRadius: 1,
                               blurRadius: 10,
                               offset: const Offset(0, 2),

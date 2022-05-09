@@ -3,21 +3,17 @@ import 'package:sqflite/sqflite.dart';
 import 'package:todo_app/model/task.dart';
 import 'package:todo_app/model/todo.dart';
 
-// import 'dart:async';
-
 class DatabaseDB {
   Future<Database> database() async {
     return openDatabase(
       join(await getDatabasesPath(), 'todo.db'),
       onCreate: (db, version) async {
-        // Run the CREATE TABLE statement on the database.
         await db.execute(
           'CREATE TABLE task(id INTEGER PRIMARY KEY,title TEXT,description TEXT)',
         );
         await db.execute(
           'CREATE TABLE todo(id INTEGER PRIMARY KEY,taskId INTEGET,title TEXT,isDone INTEGER)',
         );
-        // return db;
       },
       version: 1,
     );
@@ -39,18 +35,6 @@ class DatabaseDB {
     Database _db = await database();
     await _db.rawUpdate("UPDATE task SET title = '$title' WHERE id = '$id'");
   }
-
-  // Future<int> insertDescription(Task desc) async {
-  //   int taskId = 0;
-  //   Database _db = await database();
-  //   await _db
-  //       .insert('task', desc.toMap(),
-  //           conflictAlgorithm: ConflictAlgorithm.replace)
-  //       .then((value) {
-  //     taskId = value;
-  //   });
-  //   return taskId;
-  // }
 
   Future<void> updateDescription(int id, dynamic description) async {
     Database _db = await database();

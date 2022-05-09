@@ -113,51 +113,10 @@ class _AboutPageState extends State<AboutPage> {
                     ),
                   ],
                 ),
-                // SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
                   child: Column(
                     children: [
-                      // Text(
-                      //   'ToDo Will Be An Open-Source Project And Can Be Found On',
-                      //   textAlign: TextAlign.center,
-                      //   style: GoogleFonts.spartan(
-                      //       textStyle: const TextStyle(
-                      //     color: Colors.white,
-                      //     fontSize: 12,
-                      //   )),
-                      // ),
-                      // const SizedBox(height: 10),
-                      // TextButton(
-                      //   onPressed: () {
-                      //     launch('https://github.com/suryanarayanms');
-                      //   },
-                      //   child: Center(
-                      //     child: Row(
-                      //       mainAxisAlignment: MainAxisAlignment.center,
-                      //       children: [
-                      //         const Image(
-                      //             height: 25,
-                      //             image:
-                      //                 AssetImage('assets/github_icon_2.png')),
-                      //         const SizedBox(width: 7),
-                      //         SizedBox(
-                      //           width: MediaQuery.of(context).size.width / 4,
-                      //           child: Text(
-                      //             'Github',
-                      //             style: GoogleFonts.spartan(
-                      //                 textStyle: const TextStyle(
-                      //               color: Colors.white,
-                      //               fontWeight: FontWeight.bold,
-                      //               fontSize: 17,
-                      //             )),
-                      //           ),
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
-                      // const SizedBox(height: 10),
                       Text(
                         'Crush Over Love ❤️💫',
                         textAlign: TextAlign.center,
@@ -170,65 +129,71 @@ class _AboutPageState extends State<AboutPage> {
                     ],
                   ),
                 ),
-                // SizedBox(height: 3),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
                   child: Column(
                     children: [
                       Text(
-                        'For Queries',
+                        'ToDo Will Be An Open-Source Project',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.spartan(
                             textStyle: const TextStyle(
                           color: Colors.white,
-                          fontSize: 16,
+                          fontSize: 12,
                         )),
                       ),
-                      // SizedBox(height: 10),
-                      TextButton(
-                        onPressed: () {
-                          final Uri emailLaunchUri = Uri(
-                            scheme: 'mailto',
-                            path: 'loveforbutterflyeffect@gmail.com',
-                            query: encodeQueryParameters(<String, String>{
-                              'subject': 'ToDo',
-                              'body': 'Query: '
-                            }),
-                          );
-                          launch(emailLaunchUri.toString());
-                        },
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(
-                                Icons.mail_outline_outlined,
-                                color: Colors.white,
-                                size: 20,
-                              ),
-                              const SizedBox(width: 7),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width / 4,
-                                child: Text(
-                                  'Contact Us',
-                                  style: GoogleFonts.spartan(
-                                      textStyle: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                  )),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                launch('https://github.com/suryanarayanms');
+                              },
+                              child: Center(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Image(
+                                        height: 25,
+                                        image: AssetImage(
+                                            'assets/github_icon_2.png')),
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                final Uri emailLaunchUri = Uri(
+                                  scheme: 'mailto',
+                                  path: 'loveforbutterflyeffect@gmail.com',
+                                  query: encodeQueryParameters(<String, String>{
+                                    'subject': 'ToDo',
+                                    'body': 'Query: '
+                                  }),
+                                );
+                                launch(emailLaunchUri.toString());
+                              },
+                              child: Center(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Image(
+                                        height: 30,
+                                        image: AssetImage('assets/gmail.png')),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
                 ),
-                // Padding(padding: EdgeInsets.only(left: 17)),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(5, 30, 5, 20),
+                  padding: const EdgeInsets.fromLTRB(5, 15, 5, 15),
                   child: Column(
                     children: <Widget>[
                       Align(
@@ -245,20 +210,6 @@ class _AboutPageState extends State<AboutPage> {
                     ],
                   ),
                 ),
-                // Padding(
-                //   padding: EdgeInsets.fromLTRB(5, 30, 5, 20),
-                //   child: Center(
-                //     child: Text(
-                //       'Made with ❤️ by Surya',
-                //       style: GoogleFonts.spartan(
-                //           textStyle: TextStyle(
-                //         color: Colors.white,
-                //         fontSize: 12,
-                //       )),
-                //       textAlign: TextAlign.center,
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ),

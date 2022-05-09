@@ -54,7 +54,7 @@ class _TodoPageState extends State<TodoPage> {
       backgroundColor: Colors.blue[400],
       key: _scaffoldKey,
       drawer: const NavigationDrawerWidget(),
-      drawerEdgeDragWidth: MediaQuery.of(context).size.width,
+      drawerEdgeDragWidth: MediaQuery.of(context).size.width / 2,
       body: WillPopScope(
         onWillPop: () async {
           final difference = DateTime.now().difference(timeBackPressed);
@@ -89,7 +89,6 @@ class _TodoPageState extends State<TodoPage> {
                             child: GestureDetector(
                               onTap: () =>
                                   _scaffoldKey.currentState?.openDrawer(),
-                              // onTap: _scaffoldKey.currentState.openDrawer(),
                               child: const SizedBox(
                                 height: 30,
                                 child: Image(
@@ -102,18 +101,15 @@ class _TodoPageState extends State<TodoPage> {
                           ),
                         ),
                         const SizedBox(width: 10),
-                        DelayedDisplay(
-                            delay: const Duration(milliseconds: 500),
-                            slidingBeginOffset: const Offset(0.35, 0),
-                            child: Text(
-                              'To-Do',
-                              style: GoogleFonts.spartan(
-                                  textStyle: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 30,
-                              )),
-                            ))
+                        Text(
+                          'To-Do',
+                          style: GoogleFonts.spartan(
+                              textStyle: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 27,
+                          )),
+                        )
                       ],
                     ),
                   ),
@@ -121,18 +117,12 @@ class _TodoPageState extends State<TodoPage> {
                     child: Container(
                       width: double.infinity,
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 20
-                          // top: 20,
-                          // left: 0,
-                          // right: 0,
-                          ),
+                          horizontal: 20, vertical: 20),
                       child: Stack(
                         children: [
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // Padding(padding: EdgeInsets.only(left: 10)),
-
                               Expanded(
                                 child: Container(
                                   decoration: BoxDecoration(
@@ -141,8 +131,7 @@ class _TodoPageState extends State<TodoPage> {
                                         Radius.circular(20)),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Colors.black
-                                            .withOpacity(0.3), //color of shadow
+                                        color: Colors.black.withOpacity(0.3),
                                         spreadRadius: 2,
                                         blurRadius: 10,
                                         offset: const Offset(0, 2),
@@ -156,39 +145,49 @@ class _TodoPageState extends State<TodoPage> {
                                           snapshot.data != null) {
                                         return ScrollConfiguration(
                                           behavior: NoGlowBehavior(),
-                                          child: ListView.builder(
-                                              physics:
-                                                  const BouncingScrollPhysics(),
-                                              itemCount: snapshot.data!.length,
-                                              itemBuilder: (context, index) {
-                                                if (isLoading) {
-                                                  return buildEffect();
-                                                } else {
-                                                  return GestureDetector(
-                                                    onTap: () {
-                                                      Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              TaskPage(
-                                                            task: snapshot
-                                                                .data[index],
+                                          child: DelayedDisplay(
+                                            delay: const Duration(
+                                                milliseconds: 300),
+                                            fadeIn: true,
+                                            slidingBeginOffset:
+                                                const Offset(0, 0),
+                                            child: ListView.builder(
+                                                physics:
+                                                    const BouncingScrollPhysics(),
+                                                itemCount:
+                                                    snapshot.data!.length,
+                                                itemBuilder: (context, index) {
+                                                  if (isLoading) {
+                                                    return buildEffect();
+                                                  } else {
+                                                    return GestureDetector(
+                                                      onTap: () {
+                                                        Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder:
+                                                                (context) =>
+                                                                    TaskPage(
+                                                              task: snapshot
+                                                                  .data[index],
+                                                            ),
                                                           ),
-                                                        ),
-                                                      ).then((value) {
-                                                        setState(() {});
-                                                      });
-                                                    },
-                                                    child: TaskCard(
-                                                      title: snapshot
-                                                          .data![index]?.title,
-                                                      desc: snapshot
-                                                          .data![index]
-                                                          ?.description,
-                                                    ),
-                                                  );
-                                                }
-                                              }),
+                                                        ).then((value) {
+                                                          setState(() {});
+                                                        });
+                                                      },
+                                                      child: TaskCard(
+                                                        title: snapshot
+                                                            .data![index]
+                                                            ?.title,
+                                                        desc: snapshot
+                                                            .data![index]
+                                                            ?.description,
+                                                      ),
+                                                    );
+                                                  }
+                                                }),
+                                          ),
                                         );
                                       } else {
                                         return Center(
@@ -228,8 +227,7 @@ class _TodoPageState extends State<TodoPage> {
                                   borderRadius: BorderRadius.circular(20.0),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.black
-                                          .withOpacity(0.2), //color of shadow
+                                      color: Colors.black.withOpacity(0.2),
                                       spreadRadius: 1,
                                       blurRadius: 10,
                                       offset: const Offset(0, 2),
