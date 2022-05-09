@@ -149,7 +149,8 @@ class _AboutPageState extends State<AboutPage> {
                           children: [
                             TextButton(
                               onPressed: () {
-                                launch('https://github.com/suryanarayanms');
+                                launch(
+                                    'https://github.com/suryanarayanms/Todo-App');
                               },
                               child: Center(
                                 child: Row(
