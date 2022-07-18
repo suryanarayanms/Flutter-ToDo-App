@@ -53,9 +53,7 @@ class _TodoPageState extends State<TodoPage> {
   Widget build(BuildContext context) => Scaffold(
       backgroundColor: Colors.blue[400],
       key: _scaffoldKey,
-      drawer: NavigationDrawerWidget(
-        togglecallback: true,
-      ),
+      drawer: const NavigationDrawerWidget(),
       drawerEdgeDragWidth: MediaQuery.of(context).size.width / 2,
       body: WillPopScope(
         onWillPop: () async {
@@ -89,9 +87,8 @@ class _TodoPageState extends State<TodoPage> {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 30),
                             child: GestureDetector(
-                              onTap: () {
-                                _scaffoldKey.currentState?.openDrawer();
-                              },
+                              onTap: () =>
+                                  _scaffoldKey.currentState?.openDrawer(),
                               child: const SizedBox(
                                 height: 30,
                                 child: Image(

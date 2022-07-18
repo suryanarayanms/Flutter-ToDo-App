@@ -6,9 +6,7 @@ import 'package:todo_app/Main%20Pages/about.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NavigationDrawerWidget extends StatefulWidget {
-  bool togglecallback;
-  NavigationDrawerWidget({required this.togglecallback, Key? key})
-      : super(key: key);
+  const NavigationDrawerWidget({Key? key}) : super(key: key);
 
   @override
   State<NavigationDrawerWidget> createState() => _NavigationDrawerWidgetState();
@@ -25,10 +23,9 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // bool darkmode = true;
     return Drawer(
       child: Material(
-        color: widget.togglecallback ? Colors.white : Colors.black,
+        color: Colors.white,
         child: Column(
           children: <Widget>[
             Expanded(
@@ -144,23 +141,22 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                                 overlayColor: MaterialStateProperty.all(
                                     Colors.grey.shade100),
                               ),
-                              onPressed: () => {
-                                widget.togglecallback = false,
-                              },
+                              onPressed: () => {},
                               child: CachedNetworkImage(
                                 imageUrl:
                                     'https://cdn-icons-png.flaticon.com/512/6932/6932837.png',
                                 height: 25,
                               ),
                             ),
+                            const SizedBox(
+                              width: 15,
+                            ),
                             TextButton(
                               style: ButtonStyle(
                                 overlayColor: MaterialStateProperty.all(
                                     Colors.grey.shade100),
                               ),
-                              onPressed: () => {
-                                widget.togglecallback = true,
-                              },
+                              onPressed: () => {},
                               child: CachedNetworkImage(
                                 imageUrl:
                                     'https://cdn-icons-png.flaticon.com/512/107/107753.png',

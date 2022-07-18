@@ -93,10 +93,10 @@ class _TaskPageState extends State<TaskPage> {
                                   visible: _contentVisible,
                                   child: GestureDetector(
                                     onTap: () async {
-                                      if (_taskId != 0) {
-                                        await _db.deleteTask(_taskId);
-                                        Navigator.pop(context);
-                                      }
+                                      // if (_taskId != 0) {
+                                      //   await _db.deleteTask(_taskId);
+                                      //   Navigator.pop(context);
+                                      // }
                                     },
                                     child: Padding(
                                       padding:

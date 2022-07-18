@@ -5,7 +5,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:new_version/new_version.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
     'high_importance_channel', // id
@@ -82,7 +81,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       dynamic notification = message.notification;
       dynamic android = message.notification?.android;
@@ -109,28 +107,6 @@ class _MyHomePageState extends State<MyHomePage> {
     _checkVersion();
   }
 
-  starting() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    if (pref.getInt("thememode") != null) {
-      thememode = pref.getInt("thememode")!;
-    } else {
-      pref.setInt("thememode", thememode);
-    }
-    setState(() {});
-  }
-
-  toggletheme() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    if (pref.getInt("thememode") == 1) {
-      pref.setInt("thememode", 0);
-      thememode = 0;
-    } else {
-      pref.setInt("thememode", 1);
-      thememode = 1;
-    }
-    setState(() {});
-  }
-
   void _checkVersion() async {
     final newVersion = NewVersion(androidId: 'com.ceosurya.todoapp');
     final status = await newVersion.getVersionStatus();
@@ -145,30 +121,12 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  // ThemeData _darkTheme = ThemeData(
-  //     accentColor: Colors.red,
-  //     brightness: Brightness.dark,
-  //     primaryColor: Colors.amber);
-  // ThemeData _lightTheme = ThemeData(
-  //     accentColor: Colors.pink,
-  //     brightness: Brightness.light,
-  //     primaryColor: Colors.blue);
-
-  int thememode = 0;
-  @override
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-
       title: 'ToDo',
-      theme: ThemeData(primaryColor: Colors.red),
-
-      themeMode: thememode == 1 ? ThemeMode.dark : ThemeMode.light,
-      // theme: MyThemes.lightTheme,
-
-      darkTheme: ThemeData.dark().copyWith(primaryColor: Colors.black45),
-      home: const TodoPage(),
+      home: TodoPage(),
     );
   }
 }
