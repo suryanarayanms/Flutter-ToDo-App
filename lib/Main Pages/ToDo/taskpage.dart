@@ -215,43 +215,41 @@ class _TaskPageState extends State<TaskPage> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 35.0, top: 20.0),
-                          child: Expanded(
-                            child: TextField(
-                              autofocus: true,
-                              focusNode: _titleFocus,
-                              // onTap: unfocus,
-                              onSubmitted: (value) async {
-                                if (value != '') {
-                                  if (widget.task == null) {
-                                    Task _newTask = Task(title: value);
-                                    _taskId = await _db.insertTask(_newTask);
-                                    setState(() {
-                                      _contentVisible = true;
-                                      _taskTitle = value;
-                                    });
-                                  } else {
-                                    await _db.updateTaskTitle(_taskId, value);
+                          child: TextField(
+                            autofocus: true,
+                            focusNode: _titleFocus,
+                            // onTap: unfocus,
+                            onSubmitted: (value) async {
+                              if (value != '') {
+                                if (widget.task == null) {
+                                  Task _newTask = Task(title: value);
+                                  _taskId = await _db.insertTask(_newTask);
+                                  setState(() {
+                                    _contentVisible = true;
                                     _taskTitle = value;
-                                  }
-
-                                  _descriptionFocus.requestFocus();
+                                  });
+                                } else {
+                                  await _db.updateTaskTitle(_taskId, value);
+                                  _taskTitle = value;
                                 }
-                              },
-                              controller: TextEditingController()
-                                ..text = _taskTitle
-                                ..selection = TextSelection.collapsed(
-                                    offset: _taskTitle.length),
-                              decoration: const InputDecoration(
-                                hintText: 'Enter the title',
-                                border: InputBorder.none,
-                              ),
-                              style: GoogleFonts.spartan(
-                                  textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 30,
-                              )),
+
+                                _descriptionFocus.requestFocus();
+                              }
+                            },
+                            controller: TextEditingController()
+                              ..text = _taskTitle
+                              ..selection = TextSelection.collapsed(
+                                  offset: _taskTitle.length),
+                            decoration: const InputDecoration(
+                              hintText: 'Enter the title',
+                              border: InputBorder.none,
                             ),
+                            style: GoogleFonts.spartan(
+                                textStyle: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30,
+                            )),
                           ),
                         ),
                         const SizedBox(

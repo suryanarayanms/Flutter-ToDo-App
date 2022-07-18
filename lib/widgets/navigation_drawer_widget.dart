@@ -48,10 +48,6 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                       height: 15,
                     ),
                     TextButton(
-                      style: ButtonStyle(
-                        overlayColor:
-                            MaterialStateProperty.all(Colors.grey.shade100),
-                      ),
                       onPressed: () => selectedItem(context, 0),
                       child: Container(
                         margin: const EdgeInsets.only(
@@ -83,10 +79,6 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                       ),
                     ),
                     TextButton(
-                      style: ButtonStyle(
-                        overlayColor:
-                            MaterialStateProperty.all(Colors.grey.shade100),
-                      ),
                       onPressed: () => selectedItem(context, 1),
                       child: Container(
                         margin: const EdgeInsets.only(
