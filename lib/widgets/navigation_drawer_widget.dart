@@ -6,7 +6,9 @@ import 'package:todo_app/Main%20Pages/about.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NavigationDrawerWidget extends StatefulWidget {
-  const NavigationDrawerWidget({Key? key}) : super(key: key);
+  bool togglecallback;
+  NavigationDrawerWidget({required this.togglecallback, Key? key})
+      : super(key: key);
 
   @override
   State<NavigationDrawerWidget> createState() => _NavigationDrawerWidgetState();
@@ -23,10 +25,10 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    bool darkmode = true;
+    // bool darkmode = true;
     return Drawer(
       child: Material(
-        color: darkmode ? Colors.white : Colors.black,
+        color: widget.togglecallback ? Colors.white : Colors.black,
         child: Column(
           children: <Widget>[
             Expanded(
@@ -143,8 +145,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                                     Colors.grey.shade100),
                               ),
                               onPressed: () => {
-                                darkmode = true,
-                                print(darkmode),
+                                widget.togglecallback = false,
                               },
                               child: CachedNetworkImage(
                                 imageUrl:
@@ -152,17 +153,13 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                                 height: 25,
                               ),
                             ),
-                            SizedBox(
-                              width: 15,
-                            ),
                             TextButton(
                               style: ButtonStyle(
                                 overlayColor: MaterialStateProperty.all(
                                     Colors.grey.shade100),
                               ),
                               onPressed: () => {
-                                darkmode = false,
-                                print(darkmode),
+                                widget.togglecallback = true,
                               },
                               child: CachedNetworkImage(
                                 imageUrl:

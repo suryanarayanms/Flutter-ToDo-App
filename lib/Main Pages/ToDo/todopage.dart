@@ -53,7 +53,9 @@ class _TodoPageState extends State<TodoPage> {
   Widget build(BuildContext context) => Scaffold(
       backgroundColor: Colors.blue[400],
       key: _scaffoldKey,
-      drawer: const NavigationDrawerWidget(),
+      drawer: NavigationDrawerWidget(
+        togglecallback: true,
+      ),
       drawerEdgeDragWidth: MediaQuery.of(context).size.width / 2,
       body: WillPopScope(
         onWillPop: () async {
