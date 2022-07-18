@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:todo_app/Main%20Pages/ToDo/todopage.dart';
 import 'package:todo_app/model/task.dart';
-import 'package:todo_app/model/todo.dart';
 import 'package:todo_app/widgets/database.dart';
-import 'package:todo_app/widgets/flushbar.dart';
 
 class TaskPage extends StatefulWidget {
   const TaskPage({Key? key, this.title, this.desc, this.task})
@@ -17,13 +15,22 @@ class TaskPage extends StatefulWidget {
 }
 
 class _TaskPageState extends State<TaskPage> {
+  dynamic currentFocus;
+
+  unfocus() {
+    currentFocus = FocusScope.of(context);
+
+    if (!currentFocus.hasPrimaryFocus) {
+      currentFocus.unfocus();
+    }
+  }
+
   int _taskId = 0;
   dynamic _taskTitle = "";
-  dynamic _taskDescription = " ";
+  dynamic _taskDescription = "";
 
   late FocusNode _titleFocus;
   late FocusNode _descriptionFocus;
-  late FocusNode _todoFocus;
 
   bool _contentVisible = false;
 
@@ -39,44 +46,180 @@ class _TaskPageState extends State<TaskPage> {
 
     _titleFocus = FocusNode();
     _descriptionFocus = FocusNode();
-    _todoFocus = FocusNode();
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Stack(
+    return WillPopScope(
+      onWillPop: () async {
+        if (_taskDescription == "") {
+          await _db.deleteTask(_taskId);
+          Navigator.pop(context);
+        }
+        return true;
+      },
+      child: GestureDetector(
+        onTap: unfocus,
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          body: SafeArea(
+            child: Stack(
               children: [
-                Column(
+                Stack(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 50),
-                      child: Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 20),
-                              child: Icon(
-                                Icons.keyboard_arrow_left_sharp,
-                                color: Colors.black,
-                                size: 40,
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 40, left: 20, right: 10),
+                          child: Row(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: const Icon(
+                                  Icons.keyboard_arrow_left_sharp,
+                                  color: Colors.black,
+                                  size: 40,
+                                ),
                               ),
-                            ),
+                              const SizedBox(width: 10),
+                              Expanded(
+                                flex: 2,
+                                child: Visibility(
+                                  visible: _contentVisible,
+                                  child: GestureDetector(
+                                    onTap: () async {
+                                      if (_taskId != 0) {
+                                        await _db.deleteTask(_taskId);
+                                        Navigator.pop(context);
+                                      }
+                                    },
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 12.0),
+                                      child: Container(
+                                        width: 50.0,
+                                        height: 50.0,
+                                        decoration: BoxDecoration(
+                                          color: Colors.blue[400],
+                                          borderRadius:
+                                              BorderRadius.circular(15.0),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.black.withOpacity(0.2),
+                                              spreadRadius: 1,
+                                              blurRadius: 10,
+                                              offset: const Offset(0, 2),
+                                            )
+                                          ],
+                                        ),
+                                        child: const Icon(
+                                          Icons.save_rounded,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Visibility(
+                                  visible: _contentVisible,
+                                  child: GestureDetector(
+                                    // onTap: () async {
+                                    // if (_taskId != 0 ||
+                                    //     _taskDescription == "") {
+                                    //   await _db.deleteTask(_taskId);
+                                    //   Navigator.pop(context);
+                                    // }
+                                    // },
+                                    onTap: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) => AlertDialog(
+                                                title:
+                                                    const Text("Delete Note"),
+                                                content: const Text(
+                                                    "This note will be deleted permanently"),
+                                                actions: [
+                                                  TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              context),
+                                                      child:
+                                                          const Text("CANCEL")),
+                                                  TextButton(
+                                                    onPressed: () async {
+                                                      if (_taskId != 0 ||
+                                                          _taskDescription ==
+                                                              "") {
+                                                        await _db.deleteTask(
+                                                            _taskId);
+                                                        Navigator.pushReplacement(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder: (BuildContext
+                                                                        context) =>
+                                                                    const TodoPage()));
+                                                      }
+                                                    },
+                                                    child: const Text(
+                                                      "DELETE",
+                                                      style: TextStyle(
+                                                          color: Colors.red),
+                                                    ),
+                                                  )
+                                                ],
+                                              ));
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          right: 10.0, left: 10.0),
+                                      child: Container(
+                                        width: 50.0,
+                                        height: 50.0,
+                                        decoration: BoxDecoration(
+                                          color: Colors.red,
+                                          borderRadius:
+                                              BorderRadius.circular(15.0),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color:
+                                                  Colors.black.withOpacity(0.2),
+                                              spreadRadius: 1,
+                                              blurRadius: 10,
+                                              offset: const Offset(0, 2),
+                                            )
+                                          ],
+                                        ),
+                                        child: const Icon(
+                                          Icons.delete_forever_rounded,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(width: 10),
-                          Expanded(
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 35.0, top: 20.0),
+                          child: Expanded(
                             child: TextField(
                               autofocus: true,
                               focusNode: _titleFocus,
+                              // onTap: unfocus,
                               onSubmitted: (value) async {
                                 if (value != '') {
                                   if (widget.task == null) {
@@ -99,7 +242,7 @@ class _TaskPageState extends State<TaskPage> {
                                 ..selection = TextSelection.collapsed(
                                     offset: _taskTitle.length),
                               decoration: const InputDecoration(
-                                hintText: 'Enter the text',
+                                hintText: 'Enter the title',
                                 border: InputBorder.none,
                               ),
                               style: GoogleFonts.spartan(
@@ -110,187 +253,55 @@ class _TaskPageState extends State<TaskPage> {
                               )),
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Visibility(
-                      visible: _contentVisible,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: TextField(
-                          autofocus: true,
-                          focusNode: _descriptionFocus,
-                          onSubmitted: (value) async {
-                            if (value != '') {
-                              if (_taskId != 0) {
-                                await _db.updateDescription(_taskId, value);
-                                _taskDescription = value;
-                              }
-                            }
-                            if (_taskDescription != '') {
-                              _todoFocus.requestFocus();
-                            } else {
-                              return Snackbar().showFlushbar(
-                                  context: context,
-                                  message: "Provide A Description MF");
-                            }
-                          },
-                          controller: TextEditingController()
-                            ..text = _taskDescription
-                            ..selection = TextSelection.collapsed(
-                                offset: _taskDescription.length),
-                          decoration: InputDecoration(
-                            hintText: "Description comes over here",
-                            hintStyle: GoogleFonts.spartan(
-                                textStyle: const TextStyle(
-                                    fontWeight: FontWeight.w300)),
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            contentPadding:
-                                const EdgeInsets.symmetric(horizontal: 24),
-                          ),
-                          style: GoogleFonts.spartan(
-                              textStyle: const TextStyle(
-                                  decoration: TextDecoration.none)),
                         ),
-                      ),
-                    ),
-                    Visibility(
-                      visible: _contentVisible,
-                      child: FutureBuilder(
-                        future: _db.getTodo(_taskId),
-                        builder: (context, AsyncSnapshot snapshot) {
-                          if (snapshot.hasData && snapshot.data != null) {
-                            return Expanded(
-                              child: ListView.builder(
-                                  itemCount: snapshot.data.length,
-                                  itemBuilder: (context, index) {
-                                    return GestureDetector(
-                                      onTap: () async {
-                                        if (snapshot.data[index].isDone == 0) {
-                                          await _db.updateTodo(
-                                              snapshot.data[index].id, 1);
-                                        } else {
-                                          await _db.updateTodo(
-                                              snapshot.data[index].id, 0);
-                                        }
-                                        setState(() {});
-                                      },
-                                      child: CheckBoxWidget(
-                                        text: snapshot.data[index].title,
-                                        isDone: snapshot.data[index].isDone == 0
-                                            ? false
-                                            : true,
-                                      ),
-                                    );
-                                  }),
-                            );
-                          } else {
-                            return Container(color: Colors.black);
-                          }
-                        },
-                      ),
-                    ),
-                    Visibility(
-                      visible: _contentVisible,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 20,
-                              height: 20,
-                              margin: const EdgeInsets.only(right: 12),
-                              decoration: BoxDecoration(
-                                  color: Colors.transparent,
-                                  borderRadius: BorderRadius.circular(6.0),
-                                  border: Border.all(color: Colors.blue)),
-                              child: const Icon(
-                                Icons.check_box_outline_blank,
-                                color: Colors.transparent,
-                                size: 20,
-                              ),
-                            ),
-                            Expanded(
-                              child: TextField(
-                                focusNode: _todoFocus,
-                                controller: TextEditingController()..text = '',
-                                onSubmitted: (value) async {
-                                  if (value != "") {
-                                    if (_taskId != 0) {
-                                      DatabaseDB _db = DatabaseDB();
-                                      Todo _newTodo = Todo(
-                                          title: value,
-                                          isDone: 0,
-                                          taskId: _taskId);
-                                      await _db.insertTodo(_newTodo);
-                                      setState(() {});
-                                      _todoFocus.requestFocus();
-                                    }
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Visibility(
+                          visible: _contentVisible,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: TextField(
+                              autofocus: true,
+                              focusNode: _descriptionFocus,
+                              keyboardType: TextInputType.text,
+                              maxLines: null,
+                              // onTap: unfocus,
+                              onSubmitted: (value) async {
+                                if (value != '') {
+                                  if (_taskId != 0) {
+                                    await _db.updateDescription(_taskId, value);
+                                    _taskDescription = value;
                                   }
-                                },
-                                decoration: InputDecoration(
-                                    hintText: "Write down your TODO's",
-                                    hintStyle: GoogleFonts.spartan(
-                                        textStyle: const TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.blue)),
-                                    border: InputBorder.none),
-                                style: GoogleFonts.spartan(
+                                }
+                              },
+                              controller: TextEditingController()
+                                ..text = _taskDescription
+                                ..selection = TextSelection.collapsed(
+                                    offset: _taskDescription.length),
+                              decoration: InputDecoration(
+                                hintText: "Start typing your stories here...",
+                                hintStyle: GoogleFonts.spartan(
                                     textStyle: const TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.blue)),
-                                cursorColor: Colors.blue[400],
+                                        fontWeight: FontWeight.w300)),
+                                border: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 24, vertical: 20),
                               ),
+                              style: GoogleFonts.spartan(
+                                  textStyle: const TextStyle(
+                                      decoration: TextDecoration.none)),
                             ),
-                          ],
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ],
                 ),
-                Visibility(
-                  visible: _contentVisible,
-                  child: Positioned(
-                    bottom: 57,
-                    right: 40,
-                    child: GestureDetector(
-                      onTap: () async {
-                        if (_taskId != 0) {
-                          await _db.deleteTask(_taskId);
-                          Navigator.pop(context);
-                        }
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.only(right: 10, bottom: 20),
-                        width: 60.0,
-                        height: 60.0,
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFEC407A),
-                          borderRadius: BorderRadius.circular(20.0),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.2),
-                              spreadRadius: 1,
-                              blurRadius: 10,
-                              offset: const Offset(0, 2),
-                            )
-                          ],
-                        ),
-                        child: const Icon(
-                          Icons.delete_forever_rounded,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
               ],
             ),
-          ],
+          ),
         ),
       ),
     );

@@ -121,11 +121,25 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+  ThemeData _darkTheme = ThemeData(
+      accentColor: Colors.red,
+      brightness: Brightness.dark,
+      primaryColor: Colors.amber);
+  ThemeData _lightTheme = ThemeData(
+      accentColor: Colors.pink,
+      brightness: Brightness.light,
+      primaryColor: Colors.blue);
+
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'ToDo',
+
+      themeMode: ThemeMode.system,
+      // theme: MyThemes.lightTheme,
+
+      // darkTheme: MyThemes.darkTheme,
       home: TodoPage(),
     );
   }

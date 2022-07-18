@@ -58,7 +58,7 @@ class _TodoPageState extends State<TodoPage> {
       body: WillPopScope(
         onWillPop: () async {
           final difference = DateTime.now().difference(timeBackPressed);
-          final isExitWarning = difference >= const Duration(seconds: 2);
+          final isExitWarning = difference >= const Duration(milliseconds: 900);
           timeBackPressed = DateTime.now();
           if (isExitWarning) {
             const message = 'Press back again to exit';
@@ -87,8 +87,9 @@ class _TodoPageState extends State<TodoPage> {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 30),
                             child: GestureDetector(
-                              onTap: () =>
-                                  _scaffoldKey.currentState?.openDrawer(),
+                              onTap: () {
+                                _scaffoldKey.currentState?.openDrawer();
+                              },
                               child: const SizedBox(
                                 height: 30,
                                 child: Image(

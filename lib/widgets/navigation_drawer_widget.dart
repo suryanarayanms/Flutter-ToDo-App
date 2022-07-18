@@ -23,9 +23,10 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
 
   @override
   Widget build(BuildContext context) {
+    bool darkmode = true;
     return Drawer(
       child: Material(
-        color: Colors.white,
+        color: darkmode ? Colors.white : Colors.black,
         child: Column(
           children: <Widget>[
             Expanded(
@@ -48,6 +49,10 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                       height: 15,
                     ),
                     TextButton(
+                      style: ButtonStyle(
+                        overlayColor:
+                            MaterialStateProperty.all(Colors.grey.shade100),
+                      ),
                       onPressed: () => selectedItem(context, 0),
                       child: Container(
                         margin: const EdgeInsets.only(
@@ -79,6 +84,10 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                       ),
                     ),
                     TextButton(
+                      style: ButtonStyle(
+                        overlayColor:
+                            MaterialStateProperty.all(Colors.grey.shade100),
+                      ),
                       onPressed: () => selectedItem(context, 1),
                       child: Container(
                         margin: const EdgeInsets.only(
@@ -103,6 +112,62 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                                     fontSize: 13,
                                   )),
                                 ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(
+                          left: 12, top: 10, bottom: 10, right: 12),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              spreadRadius: 1,
+                              blurRadius: 10,
+                              offset: const Offset(4, 4),
+                            )
+                          ],
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                              style: ButtonStyle(
+                                overlayColor: MaterialStateProperty.all(
+                                    Colors.grey.shade100),
+                              ),
+                              onPressed: () => {
+                                darkmode = true,
+                                print(darkmode),
+                              },
+                              child: CachedNetworkImage(
+                                imageUrl:
+                                    'https://cdn-icons-png.flaticon.com/512/6932/6932837.png',
+                                height: 25,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            TextButton(
+                              style: ButtonStyle(
+                                overlayColor: MaterialStateProperty.all(
+                                    Colors.grey.shade100),
+                              ),
+                              onPressed: () => {
+                                darkmode = false,
+                                print(darkmode),
+                              },
+                              child: CachedNetworkImage(
+                                imageUrl:
+                                    'https://cdn-icons-png.flaticon.com/512/107/107753.png',
+                                height: 22,
                               ),
                             ),
                           ],
