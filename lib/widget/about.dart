@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:package_info/package_info.dart';
-import 'package:todo_app/Main%20Pages/ToDo/todopage.dart';
+import 'package:todo_app/page/notes_page.dart';
+// import 'package:todo_app/Main%20Pages/ToDo/todopage.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
@@ -49,7 +49,7 @@ class _AboutPageState extends State<AboutPage> {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).pop(MaterialPageRoute(
-                      builder: (context) => const TodoPage(),
+                      builder: (context) => const NotesPage(),
                     ));
                   },
                   child: const Padding(
@@ -62,14 +62,13 @@ class _AboutPageState extends State<AboutPage> {
                   ),
                 ),
                 const SizedBox(width: 10),
-                Text(
+                const Text(
                   'About',
-                  style: GoogleFonts.spartan(
-                      textStyle: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 30,
-                  )),
+                  ),
                 )
               ],
             ),
@@ -94,37 +93,34 @@ class _AboutPageState extends State<AboutPage> {
                       ),
                     ),
                     const SizedBox(height: 17),
-                    Text(
-                      'ToDo',
+                    const Text(
+                      'Stack Notes',
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.spartan(
-                          textStyle: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 30,
-                      )),
+                      ),
                     ),
                     Text(
                       'v$appVersion',
-                      style: GoogleFonts.spartan(
-                          textStyle: const TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
-                      )),
+                      ),
                     ),
                   ],
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
                   child: Column(
-                    children: [
+                    children: const [
                       Text(
                         'Crush Over Love ❤️💫',
                         textAlign: TextAlign.center,
-                        style: GoogleFonts.spartan(
-                            textStyle: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white,
                           fontSize: 16,
-                        )),
+                        ),
                       ),
                     ],
                   ),
@@ -133,14 +129,13 @@ class _AboutPageState extends State<AboutPage> {
                   padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
                   child: Column(
                     children: [
-                      Text(
+                      const Text(
                         'ToDo Will Be An Open-Source Project',
                         textAlign: TextAlign.center,
-                        style: GoogleFonts.spartan(
-                            textStyle: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white,
                           fontSize: 12,
-                        )),
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0),
@@ -149,6 +144,7 @@ class _AboutPageState extends State<AboutPage> {
                           children: [
                             TextButton(
                               onPressed: () {
+                                // ignore: deprecated_member_use
                                 launch(
                                     'https://github.com/suryanarayanms/Todo-App');
                               },
@@ -174,6 +170,7 @@ class _AboutPageState extends State<AboutPage> {
                                     'body': 'Query: '
                                   }),
                                 );
+                                // ignore: deprecated_member_use
                                 launch(emailLaunchUri.toString());
                               },
                               child: Center(
@@ -196,16 +193,15 @@ class _AboutPageState extends State<AboutPage> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(5, 15, 5, 15),
                   child: Column(
-                    children: <Widget>[
+                    children: const <Widget>[
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: Text(
                           'Made with ❤️ by Surya',
-                          style: GoogleFonts.spartan(
-                              textStyle: const TextStyle(
+                          style: TextStyle(
                             color: Colors.white,
                             fontSize: 12,
-                          )),
+                          ),
                         ),
                       )
                     ],
