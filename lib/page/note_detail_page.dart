@@ -1,8 +1,9 @@
-import 'package:todo_app/page/notes_page.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:todo_app/db/notes_database.dart';
 import 'package:todo_app/model/note.dart';
 import 'package:todo_app/page/edit_note_page.dart';
+import 'package:todo_app/page/notes_page.dart';
 
 class NoteDetailPage extends StatefulWidget {
   final int noteId;
@@ -30,7 +31,7 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
   Future refreshNote() async {
     setState(() => isLoading = true);
 
-    note = await NotesDatabase.instance.readNote(widget.noteId);
+    this.note = await NotesDatabase.instance.readNote(widget.noteId);
 
     setState(() => isLoading = false);
   }
@@ -42,8 +43,8 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
           toolbarHeight: 100,
           leading: GestureDetector(
             onTap: () => {Navigator.of(context).pop()},
-            child: const Padding(
-              padding: EdgeInsets.only(left: 20, top: 40.0),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20, top: 40.0),
               child: Icon(
                 Icons.keyboard_arrow_left_sharp,
                 color: Colors.black,
@@ -62,32 +63,18 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
             ),
           ],
         ),
-        // floatingActionButton: Padding(
-        //   padding: EdgeInsets.only(right: 40.0, bottom: 60),
-        //   child: FloatingActionButton(
-        //     backgroundColor: Colors.red[400],
-        //     child: Icon(Icons.delete),
-        //     shape:
-        //         BeveledRectangleBorder(borderRadius: BorderRadius.circular(2)),
-        //     onPressed: () async {
-        //       await NotesDatabase.instance.delete(widget.noteId);
-
-        //       Navigator.of(context).pop();
-        //     },
-        //   ),
-        // ),
         body: isLoading
-            ? const Center(child: CircularProgressIndicator())
+            ? Center(child: CircularProgressIndicator())
             : Padding(
-                padding: const EdgeInsets.only(
-                    top: 0, left: 30, right: 30, bottom: 0),
+                padding:
+                    EdgeInsets.only(top: 0, left: 30, right: 30, bottom: 0),
                 child: Column(
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 20.0, bottom: 20),
                       child: Text(
                         note.title,
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.black,
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
@@ -96,21 +83,12 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
                     ),
                     Expanded(
                       child: ListView(
-                        physics: const BouncingScrollPhysics(),
-                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        physics: BouncingScrollPhysics(),
+                        padding: EdgeInsets.symmetric(vertical: 8),
                         children: [
-                          // Text(
-                          //   note.title,
-                          //   style: TextStyle(
-                          //     color: Colors.black,
-                          //     fontSize: 22,
-                          //     fontWeight: FontWeight.bold,
-                          //   ),
-                          // ),
                           Text(
                             note.description,
-                            style: const TextStyle(
-                                color: Colors.black, fontSize: 18),
+                            style: TextStyle(color: Colors.black, fontSize: 18),
                           )
                         ],
                       ),
@@ -121,7 +99,7 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
       );
 
   Widget editButton() => Padding(
-        padding: const EdgeInsets.only(top: 8.0, right: 10, bottom: 10),
+        padding: const EdgeInsets.only(right: 20.0),
         child: Visibility(
           visible: true,
           child: GestureDetector(
@@ -134,86 +112,107 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
 
               refreshNote();
             },
-            child: Padding(
-              padding: const EdgeInsets.only(left: 12.0),
-              child: Container(
-                width: 50.0,
-                height: 50.0,
-                decoration: BoxDecoration(
-                  color: Colors.blue[400],
-                  borderRadius: BorderRadius.circular(15.0),
-                  // boxShadow: [
-                  //   BoxShadow(
-                  //     color: Colors.black.withOpacity(0.2),
-                  //     spreadRadius: 1,
-                  //     blurRadius: 10,
-                  //     offset: const Offset(0, 2),
-                  //   )
-                  // ],
-                ),
-                child: const Icon(
-                  Icons.edit,
-                  color: Colors.white,
-                ),
+            child: Container(
+              width: 70.0,
+              height: 50.0,
+              decoration: BoxDecoration(
+                color: Colors.blue[400],
+                borderRadius: BorderRadius.circular(15.0),
+                // boxShadow: [
+                //   BoxShadow(
+                //     color: Colors.black.withOpacity(0.2),
+                //     spreadRadius: 1,
+                //     blurRadius: 10,
+                //     offset: const Offset(0, 2),
+                //   )
+                // ],
+              ),
+              child: const Icon(
+                Icons.edit,
+                color: Colors.white,
               ),
             ),
           ),
         ),
       );
 
-  Widget deleteButton() => Padding(
-        padding: const EdgeInsets.only(top: 8.0, right: 20, bottom: 10),
-        child: Visibility(
-          visible: true,
-          child: GestureDetector(
-            // onTap: () async {
-            // await NotesDatabase.instance.delete(widget.noteId);
-
-            // Navigator.of(context).pop();
-            // },
-            onTap: () => showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                      title: const Text("Delete Note"),
-                      content:
-                          const Text("This note will be deleted permanently"),
-                      actions: [
-                        TextButton(
-                            onPressed: () => Navigator.pop(context),
-                            child: const Text("CANCEL")),
-                        TextButton(
-                          onPressed: () async {
-                            await NotesDatabase.instance.delete(widget.noteId);
-                            Navigator.of(context)
-                                .popUntil((route) => route.isFirst);
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        const NotesPage()));
-                          },
-                          child: const Text(
-                            "DELETE",
-                            style: TextStyle(color: Colors.red),
-                          ),
-                        )
-                      ],
-                    )),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 12.0),
-              child: Container(
-                width: 50.0,
-                height: 50.0,
-                decoration: BoxDecoration(
-                  color: Colors.red[400],
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                child: const Icon(
-                  Icons.delete,
-                  color: Colors.white,
-                ),
-              ),
+  Widget deleteButton() => GestureDetector(
+        onTap: () => showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: const Text("Delete Note"),
+                  content: const Text("This note will be deleted permanently"),
+                  actions: [
+                    TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: const Text("CANCEL")),
+                    TextButton(
+                      onPressed: () async {
+                        await NotesDatabase.instance.delete(widget.noteId);
+                        Navigator.of(context)
+                            .popUntil((route) => route.isFirst);
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    NotesPage()));
+                      },
+                      child: const Text(
+                        "DELETE",
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    )
+                  ],
+                )),
+        child: Container(
+          width: 70.0,
+          height: 50.0,
+          decoration: BoxDecoration(
+            color: Colors.red[400],
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          child: IconButton(
+            icon: Icon(
+              Icons.delete,
+              color: Colors.white,
             ),
+
+            onPressed: () async {
+              await NotesDatabase.instance.delete(widget.noteId);
+
+              Navigator.of(context).pop();
+            },
+            // showDialog(
+            //     context: context,
+            //     builder: (context) => AlertDialog(
+            //           title: const Text("Delete Note"),
+            //           content:
+            //               const Text("This note will be deleted permanently"),
+            //           actions: [
+            //             TextButton(
+            //                 onPressed: () => Navigator.pop(context),
+            //                 child: const Text("CANCEL")),
+            //             TextButton(
+            //               onPressed: () async {
+            //                 await NotesDatabase.instance
+            //                     .delete(widget.noteId);
+
+            //                 Navigator.of(context).pop();
+            //               },
+            //               child: const Text(
+            //                 "DELETE",
+            //                 style: TextStyle(color: Colors.red),
+            //               ),
+            //             )
+            //           ],
+            //         ));
+            // },
+
+            // onPressed: () async {
+            //   await NotesDatabase.instance.delete(widget.noteId);
+
+            //   Navigator.of(context).pop();
+            // },
           ),
         ),
       );

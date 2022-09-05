@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/model/note.dart';
 
 class NoteCardWidget extends StatelessWidget {
-  const NoteCardWidget({
+  NoteCardWidget({
     Key? key,
     required this.note,
     required this.index,
@@ -32,9 +32,8 @@ class NoteCardWidget extends StatelessWidget {
           ],
         ),
         // width: double.infinity,
-        constraints: const BoxConstraints(minHeight: 100),
-        padding:
-            const EdgeInsets.only(left: 20, top: 20, bottom: 20, right: 20),
+        constraints: BoxConstraints(minHeight: 100),
+        padding: EdgeInsets.only(left: 20, top: 20, bottom: 20, right: 20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,23 +47,23 @@ class NoteCardWidget extends StatelessWidget {
             Text(
               note.title,
               maxLines: 1,
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.black,
                 fontSize: 27,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 4),
+            SizedBox(height: 4),
             Text(
               note.description,
               maxLines: 2,
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.black,
                 fontSize: 15,
                 // fontWeight: FontWeight.bold,
               ),
             ),
-            const Text(
+            Text(
               "...",
               style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
             )

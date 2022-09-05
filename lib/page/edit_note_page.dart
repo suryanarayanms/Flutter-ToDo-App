@@ -39,8 +39,8 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
           // actions: [buildButton()],
           leading: GestureDetector(
             onTap: () => {Navigator.of(context).pop()},
-            child: const Padding(
-              padding: EdgeInsets.only(left: 20, top: 40.0),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20, top: 40.0),
               child: Icon(
                 Icons.keyboard_arrow_left_sharp,
                 color: Colors.black,
@@ -65,7 +65,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
           ),
         ),
         floatingActionButton: Padding(
-          padding: const EdgeInsets.only(right: 40.0, bottom: 60),
+          padding: EdgeInsets.only(right: 40.0, bottom: 60),
           child: GestureDetector(
             onTap: () async {
               addOrUpdateNote();
@@ -79,7 +79,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
                   height: 50,
                   width: 50,
                 ),
-                const SizedBox(
+                Container(
                   height: 50,
                   width: 50,
                   child: Icon(
@@ -96,7 +96,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
   Widget buildButton() {
     // final isFormValid = title.isNotEmpty && description.isNotEmpty;
 
-    return const Padding(
+    return Padding(
       padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
     );
   }

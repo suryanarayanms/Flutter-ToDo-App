@@ -9,13 +9,11 @@ Future main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  static const String title = 'Stack Notes';
-
-  const MyApp({Key? key}) : super(key: key);
+  static final String title = 'Stack Notes';
 
   @override
   Widget build(BuildContext context) => MaterialApp(
@@ -25,11 +23,11 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primaryColor: Colors.black,
           scaffoldBackgroundColor: Colors.blueGrey.shade900,
-          appBarTheme: const AppBarTheme(
+          appBarTheme: AppBarTheme(
             backgroundColor: Colors.transparent,
             elevation: 0,
           ),
         ),
-        home: const NotesPage(),
+        home: NotesPage(),
       );
 }

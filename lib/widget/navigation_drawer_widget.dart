@@ -64,7 +64,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                               padding: const EdgeInsets.only(left: 15),
                               child: SizedBox(
                                 width: MediaQuery.of(context).size.width / 2,
-                                child: const Text(
+                                child: Text(
                                   'Send Feedback!',
                                   style: TextStyle(
                                     color: Colors.black,
@@ -94,9 +94,9 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                               padding: const EdgeInsets.only(left: 15.0),
                               child: SizedBox(
                                 width: MediaQuery.of(context).size.width / 4,
-                                child: const Text(
+                                child: Text(
                                   'About',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 13,
@@ -169,9 +169,9 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
               child: Container(
                 padding: const EdgeInsets.all(10),
                 height: 50,
-                child: const Text(
+                child: Text(
                   'Made with ❤️ by Surya',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 12,
                   ),

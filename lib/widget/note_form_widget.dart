@@ -26,12 +26,11 @@ class NoteFormWidget extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: Colors.white,
         body: Padding(
-          padding: const EdgeInsets.only(top: 16, left: 30, right: 30),
+          padding: EdgeInsets.only(top: 16, left: 30, right: 30),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               buildTitle(),
-              const SizedBox(height: 8),
               buildDescription(),
             ],
           ),
@@ -41,12 +40,12 @@ class NoteFormWidget extends StatelessWidget {
   Widget buildTitle() => TextFormField(
         maxLines: 1,
         initialValue: title,
-        style: const TextStyle(
+        style: TextStyle(
           color: Colors.black,
           fontWeight: FontWeight.bold,
           fontSize: 24,
         ),
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
           border: InputBorder.none,
           hintText: 'Title',
           hintStyle: TextStyle(color: Colors.black),
@@ -58,10 +57,12 @@ class NoteFormWidget extends StatelessWidget {
 
   Widget buildDescription() => Expanded(
         child: TextFormField(
-          maxLines: 1,
+          // minLines: -,
+          maxLines: 1000,
+          maxLength: 1000,
           initialValue: description,
-          style: const TextStyle(color: Colors.black, fontSize: 18),
-          decoration: const InputDecoration(
+          style: TextStyle(color: Colors.black, fontSize: 18),
+          decoration: InputDecoration(
             border: InputBorder.none,
             hintText: 'Type something...',
             hintStyle: TextStyle(color: Colors.black),
