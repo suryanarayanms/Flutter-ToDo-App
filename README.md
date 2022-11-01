@@ -17,7 +17,7 @@ Todo Tasks is easy-to-use, flexible, and handy.
 - We respect your privacy!!.
 
 # UI
-<img alt="Homepage of ToDo" src="https://www.linkpicture.com/q/image1-1_2.jpeg" width="20%"> <img alt="Taskpage of ToDo" src="https://www.linkpicture.com/q/image2-1.jpeg" width="20%">
+<img alt="Homepage of ToDo" src="https://www.linkpicture.com/q/image1-1_2.jpeg" width="47%"> <img alt="Taskpage of ToDo" src="https://www.linkpicture.com/q/image2-1.jpeg" width="47%">
 
 
 ## LICENSE
