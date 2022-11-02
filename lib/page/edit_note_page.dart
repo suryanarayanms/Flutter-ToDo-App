@@ -16,6 +16,7 @@ class AddEditNotePage extends StatefulWidget {
 
 class _AddEditNotePageState extends State<AddEditNotePage> {
   final _formKey = GlobalKey<FormState>();
+  DateTime timeBackPressed = DateTime.now();
   late bool isImportant;
   late int number;
   late String title;
@@ -32,62 +33,79 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          toolbarHeight: 100,
-          // actions: [buildButton()],
-          leading: GestureDetector(
-            onTap: () => {Navigator.of(context).pop()},
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20, top: 40.0),
-              child: Icon(
-                Icons.keyboard_arrow_left_sharp,
-                color: Colors.black,
-                size: 40,
+  Widget build(BuildContext context) => WillPopScope(
+        onWillPop: () async {
+          if (description != '' && title == '' ||
+              title != '' && description != '') {
+            addOrUpdateNote();
+          } else {
+            Navigator.of(context).pop();
+          }
+          throw {};
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            toolbarHeight: 100,
+            // actions: [buildButton()],
+            leading: GestureDetector(
+              onTap: () => {
+                if (description != '' && title == '' ||
+                    title != '' && description != '')
+                  {addOrUpdateNote()}
+                else
+                  {Navigator.of(context).pop()}
+              },
+              child: const Padding(
+                padding: EdgeInsets.only(left: 20, top: 40.0),
+                child: Icon(
+                  Icons.keyboard_arrow_left_sharp,
+                  color: Colors.black,
+                  size: 40,
+                ),
               ),
             ),
           ),
-        ),
-        body: Form(
-          key: _formKey,
-          child: NoteFormWidget(
-            isImportant: isImportant,
-            number: number,
-            title: title,
-            description: description,
-            onChangedImportant: (isImportant) =>
-                setState(() => this.isImportant = isImportant),
-            onChangedNumber: (number) => setState(() => this.number = number),
-            onChangedTitle: (title) => setState(() => this.title = title),
-            onChangedDescription: (description) =>
-                setState(() => this.description = description),
+          body: Form(
+            key: _formKey,
+            child: NoteFormWidget(
+              isImportant: isImportant,
+              number: number,
+              title: title,
+              description: description,
+              onChangedImportant: (isImportant) =>
+                  setState(() => this.isImportant = isImportant),
+              onChangedNumber: (number) => setState(() => this.number = number),
+              onChangedTitle: (title) => setState(() => this.title = title),
+              onChangedDescription: (description) =>
+                  setState(() => this.description = description),
+            ),
           ),
-        ),
-        floatingActionButton: Padding(
-          padding: EdgeInsets.only(right: 40.0, bottom: 60),
-          child: GestureDetector(
-            onTap: () async {
-              addOrUpdateNote();
-            },
-            child: Stack(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.circular(10)),
-                  height: 50,
-                  width: 50,
-                ),
-                Container(
-                  height: 50,
-                  width: 50,
-                  child: Icon(
-                    Icons.save,
-                    color: Colors.white,
+          floatingActionButton: Padding(
+            padding: const EdgeInsets.only(right: 40.0, bottom: 60),
+            child: GestureDetector(
+              onTap: () async {
+                addOrUpdateNote();
+              },
+              child: Stack(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(10)),
+                    height: 50,
+                    width: 50,
                   ),
-                )
-              ],
+                  const SizedBox(
+                    height: 50,
+                    width: 50,
+                    child: Icon(
+                      Icons.save,
+                      color: Colors.white,
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
@@ -96,7 +114,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
   Widget buildButton() {
     // final isFormValid = title.isNotEmpty && description.isNotEmpty;
 
-    return Padding(
+    return const Padding(
       padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
     );
   }

@@ -49,7 +49,7 @@ class _AboutPageState extends State<AboutPage> {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).pop(MaterialPageRoute(
-                      builder: (context) => NotesPage(),
+                      builder: (context) => const NotesPage(),
                     ));
                   },
                   child: const Padding(
@@ -62,7 +62,7 @@ class _AboutPageState extends State<AboutPage> {
                   ),
                 ),
                 const SizedBox(width: 10),
-                Text(
+                const Text(
                   'About',
                   style: TextStyle(
                     color: Colors.white,
@@ -93,7 +93,7 @@ class _AboutPageState extends State<AboutPage> {
                       ),
                     ),
                     const SizedBox(height: 17),
-                    Text(
+                    const Text(
                       'Stack Notes',
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -104,7 +104,7 @@ class _AboutPageState extends State<AboutPage> {
                     ),
                     Text(
                       'v$appVersion',
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                       ),
                     ),
@@ -113,7 +113,7 @@ class _AboutPageState extends State<AboutPage> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
                   child: Column(
-                    children: [
+                    children: const [
                       Text(
                         'Crush Over Love ❤️💫',
                         textAlign: TextAlign.center,
@@ -129,7 +129,7 @@ class _AboutPageState extends State<AboutPage> {
                   padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
                   child: Column(
                     children: [
-                      Text(
+                      const Text(
                         'Stack Will Be An Open-Source Project',
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -193,7 +193,7 @@ class _AboutPageState extends State<AboutPage> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(5, 15, 5, 15),
                   child: Column(
-                    children: <Widget>[
+                    children: const <Widget>[
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: Text(

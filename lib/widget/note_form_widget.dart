@@ -26,7 +26,7 @@ class NoteFormWidget extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: Colors.white,
         body: Padding(
-          padding: EdgeInsets.only(top: 16, left: 30, right: 30),
+          padding: const EdgeInsets.only(top: 16, left: 30, right: 30),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -40,18 +40,18 @@ class NoteFormWidget extends StatelessWidget {
   Widget buildTitle() => TextFormField(
         maxLines: 1,
         initialValue: title,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.black,
           fontWeight: FontWeight.bold,
           fontSize: 24,
         ),
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           border: InputBorder.none,
           hintText: 'Title',
           hintStyle: TextStyle(color: Colors.black),
         ),
-        validator: (title) =>
-            title != null && title.isEmpty ? 'The title cannot be empty' : null,
+        // validator: (title) =>
+        //     title != null && title.isEmpty ? 'The title cannot be empty' : null,
         onChanged: onChangedTitle,
       );
 
@@ -61,8 +61,8 @@ class NoteFormWidget extends StatelessWidget {
           maxLines: 1000,
           maxLength: 1000,
           initialValue: description,
-          style: TextStyle(color: Colors.black, fontSize: 18),
-          decoration: InputDecoration(
+          style: const TextStyle(color: Colors.black, fontSize: 18),
+          decoration: const InputDecoration(
             border: InputBorder.none,
             hintText: 'Type something...',
             hintStyle: TextStyle(color: Colors.black),

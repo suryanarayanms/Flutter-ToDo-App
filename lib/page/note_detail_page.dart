@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:todo_app/db/notes_database.dart';
 import 'package:todo_app/model/note.dart';
 import 'package:todo_app/page/edit_note_page.dart';
@@ -31,7 +30,7 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
   Future refreshNote() async {
     setState(() => isLoading = true);
 
-    this.note = await NotesDatabase.instance.readNote(widget.noteId);
+    note = await NotesDatabase.instance.readNote(widget.noteId);
 
     setState(() => isLoading = false);
   }
@@ -43,8 +42,8 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
           toolbarHeight: 100,
           leading: GestureDetector(
             onTap: () => {Navigator.of(context).pop()},
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20, top: 40.0),
+            child: const Padding(
+              padding: EdgeInsets.only(left: 20, top: 40.0),
               child: Icon(
                 Icons.keyboard_arrow_left_sharp,
                 color: Colors.black,
@@ -64,17 +63,17 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
           ],
         ),
         body: isLoading
-            ? Center(child: CircularProgressIndicator())
+            ? const Center(child: CircularProgressIndicator())
             : Padding(
-                padding:
-                    EdgeInsets.only(top: 0, left: 30, right: 30, bottom: 0),
+                padding: const EdgeInsets.only(
+                    top: 0, left: 30, right: 30, bottom: 0),
                 child: Column(
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 20.0, bottom: 20),
                       child: Text(
                         note.title,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
@@ -83,12 +82,13 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
                     ),
                     Expanded(
                       child: ListView(
-                        physics: BouncingScrollPhysics(),
-                        padding: EdgeInsets.symmetric(vertical: 8),
+                        physics: const BouncingScrollPhysics(),
+                        padding: const EdgeInsets.symmetric(vertical: 8),
                         children: [
                           Text(
                             note.description,
-                            style: TextStyle(color: Colors.black, fontSize: 18),
+                            style: const TextStyle(
+                                color: Colors.black, fontSize: 18),
                           )
                         ],
                       ),
@@ -155,7 +155,7 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) =>
-                                    NotesPage()));
+                                    const NotesPage()));
                       },
                       child: const Text(
                         "DELETE",
@@ -172,7 +172,7 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
             borderRadius: BorderRadius.circular(15.0),
           ),
           child: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.delete,
               color: Colors.white,
             ),

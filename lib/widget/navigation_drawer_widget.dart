@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:delayed_display/delayed_display.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/widget/about.dart';
 // import 'package:google_fonts/google_fonts.dart';
@@ -11,6 +12,25 @@ class NavigationDrawerWidget extends StatefulWidget {
 
   @override
   State<NavigationDrawerWidget> createState() => _NavigationDrawerWidgetState();
+}
+
+void _showdialog(BuildContext context) {
+  showDialog(
+    // barrierDismissible: false,
+    builder: (BuildContext context) {
+      return const CupertinoAlertDialog(
+        title: Text(
+          'Tamil Meme Templates\n',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
+        content: Text(
+          "Our products:\n\t\t\t\t- Tamil Meme Templates\n\t\t\t\t- Stack Notes\n\t\t\t\t- Rant\n\nCEO Surya will come back with lot more interesting products.",
+          textAlign: TextAlign.left,
+        ),
+      );
+    },
+    context: context,
+  );
 }
 
 class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
@@ -39,9 +59,12 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                     DrawerHeader(
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: 10.0, top: 10),
-                        child: CachedNetworkImage(
-                          imageUrl:
-                              "https://cdn-icons-png.flaticon.com/512/6315/6315058.png",
+                        child: GestureDetector(
+                          onTap: () => _showdialog(context),
+                          child: CachedNetworkImage(
+                            imageUrl:
+                                "https://cdn-icons-png.flaticon.com/512/6315/6315058.png",
+                          ),
                         ),
                       ),
                     ),
@@ -64,7 +87,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                               padding: const EdgeInsets.only(left: 15),
                               child: SizedBox(
                                 width: MediaQuery.of(context).size.width / 2,
-                                child: Text(
+                                child: const Text(
                                   'Send Feedback!',
                                   style: TextStyle(
                                     color: Colors.black,
@@ -94,9 +117,9 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                               padding: const EdgeInsets.only(left: 15.0),
                               child: SizedBox(
                                 width: MediaQuery.of(context).size.width / 4,
-                                child: Text(
+                                child: const Text(
                                   'About',
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 13,
@@ -169,9 +192,9 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
               child: Container(
                 padding: const EdgeInsets.all(10),
                 height: 50,
-                child: Text(
+                child: const Text(
                   'Made with ❤️ by Surya',
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.black,
                     fontSize: 12,
                   ),

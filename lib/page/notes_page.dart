@@ -10,6 +10,8 @@ import 'package:todo_app/widget/note_card_widget.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class NotesPage extends StatefulWidget {
+  const NotesPage({Key? key}) : super(key: key);
+
   @override
   _NotesPageState createState() => _NotesPageState();
 }
@@ -37,7 +39,7 @@ class _NotesPageState extends State<NotesPage> {
   Future refreshNotes() async {
     setState(() => isLoading = true);
 
-    this.notes = await NotesDatabase.instance.readAllNotes();
+    notes = await NotesDatabase.instance.readAllNotes();
 
     setState(() => isLoading = false);
   }
@@ -76,10 +78,10 @@ class _NotesPageState extends State<NotesPage> {
                   },
                   // _scaffoldKey.currentState?.openDrawer(),
                   child: Row(
-                    children: [
+                    children: const [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30),
-                        child: const SizedBox(
+                        padding: EdgeInsets.symmetric(horizontal: 30),
+                        child: SizedBox(
                           height: 30,
                           child: Image(
                             image: AssetImage(
@@ -89,7 +91,7 @@ class _NotesPageState extends State<NotesPage> {
                         ),
                       ),
                       Text('Notes',
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 27,
@@ -116,9 +118,9 @@ class _NotesPageState extends State<NotesPage> {
                     ),
                     child: Center(
                       child: isLoading
-                          ? CircularProgressIndicator()
+                          ? const CircularProgressIndicator()
                           : notes.isEmpty
-                              ? Text(
+                              ? const Text(
                                   'Create New Notes',
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 24),
@@ -136,11 +138,12 @@ class _NotesPageState extends State<NotesPage> {
           ),
         ),
         floatingActionButton: Padding(
-          padding: EdgeInsets.only(right: 40.0, bottom: 60),
+          padding: const EdgeInsets.only(right: 40.0, bottom: 60),
           child: GestureDetector(
             onTap: () async {
               await Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => AddEditNotePage()),
+                MaterialPageRoute(
+                    builder: (context) => const AddEditNotePage()),
               );
 
               refreshNotes();
@@ -154,7 +157,7 @@ class _NotesPageState extends State<NotesPage> {
                   height: 50,
                   width: 50,
                 ),
-                Container(
+                const SizedBox(
                   height: 50,
                   width: 50,
                   child: Icon(
@@ -169,11 +172,11 @@ class _NotesPageState extends State<NotesPage> {
       );
 
   Widget buildNotes() => StaggeredGridView.countBuilder(
-        padding: EdgeInsets.only(top: 20, right: 5, left: 5),
+        padding: const EdgeInsets.only(top: 20, right: 5, left: 5),
         itemCount: notes.length,
-        staggeredTileBuilder: (index) => StaggeredTile.fit(4),
+        staggeredTileBuilder: (index) => const StaggeredTile.fit(4),
         crossAxisCount: 4,
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         mainAxisSpacing: 4,
         crossAxisSpacing: 4,
         itemBuilder: (context, index) {
