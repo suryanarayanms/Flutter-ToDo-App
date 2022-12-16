@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/model/note.dart';
+
+import '../Provider/toggletheme.dart';
 
 class NoteCardWidget extends StatelessWidget {
   const NoteCardWidget({
@@ -20,7 +23,9 @@ class NoteCardWidget extends StatelessWidget {
       child: Container(
         // height: 100,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: context.watch<ChangeTheme>().currenttheme
+              ? Colors.white
+              : Colors.black,
           borderRadius: const BorderRadius.all(Radius.circular(20)),
           boxShadow: [
             BoxShadow(
@@ -48,8 +53,10 @@ class NoteCardWidget extends StatelessWidget {
             Text(
               note.title,
               maxLines: 1,
-              style: const TextStyle(
-                color: Colors.black,
+              style: TextStyle(
+                color: context.watch<ChangeTheme>().currenttheme
+                    ? Colors.black
+                    : Colors.white,
                 fontSize: 27,
                 fontWeight: FontWeight.bold,
               ),
@@ -58,8 +65,10 @@ class NoteCardWidget extends StatelessWidget {
             Text(
               note.description,
               maxLines: 2,
-              style: const TextStyle(
-                color: Colors.black,
+              style: TextStyle(
+                color: context.watch<ChangeTheme>().currenttheme
+                    ? Colors.black
+                    : Colors.white,
                 fontSize: 15,
                 // fontWeight: FontWeight.bold,
               ),

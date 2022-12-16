@@ -2,10 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/widget/about.dart';
 // import 'package:google_fonts/google_fonts.dart';
 // import 'package:todo_app/Main%20Pages/about.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../Provider/toggletheme.dart';
 
 class NavigationDrawerWidget extends StatefulWidget {
   const NavigationDrawerWidget({Key? key}) : super(key: key);
@@ -46,7 +49,9 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
   Widget build(BuildContext context) {
     return Drawer(
       child: Material(
-        color: Colors.white,
+        color: context.watch<ChangeTheme>().currenttheme
+            ? Colors.white
+            : Colors.black,
         child: Column(
           children: <Widget>[
             Expanded(
@@ -87,10 +92,14 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                               padding: const EdgeInsets.only(left: 15),
                               child: SizedBox(
                                 width: MediaQuery.of(context).size.width / 2,
-                                child: const Text(
+                                child: Text(
                                   'Send Feedback!',
                                   style: TextStyle(
-                                    color: Colors.black,
+                                    color: context
+                                            .watch<ChangeTheme>()
+                                            .currenttheme
+                                        ? Colors.black
+                                        : Colors.white,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 13,
                                   ),
@@ -117,10 +126,14 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                               padding: const EdgeInsets.only(left: 15.0),
                               child: SizedBox(
                                 width: MediaQuery.of(context).size.width / 4,
-                                child: const Text(
+                                child: Text(
                                   'About',
                                   style: TextStyle(
-                                    color: Colors.black,
+                                    color: context
+                                            .watch<ChangeTheme>()
+                                            .currenttheme
+                                        ? Colors.black
+                                        : Colors.white,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 13,
                                   ),
@@ -192,10 +205,12 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
               child: Container(
                 padding: const EdgeInsets.all(10),
                 height: 50,
-                child: const Text(
+                child: Text(
                   'Made with ❤️ by Surya',
                   style: TextStyle(
-                    color: Colors.black,
+                    color: context.watch<ChangeTheme>().currenttheme
+                        ? Colors.black
+                        : Colors.white,
                     fontSize: 12,
                   ),
                   textAlign: TextAlign.center,

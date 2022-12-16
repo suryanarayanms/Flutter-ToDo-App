@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:package_info/package_info.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/page/notes_page.dart';
 // import 'package:todo_app/Main%20Pages/ToDo/todopage.dart';
 
 import 'package:url_launcher/url_launcher.dart';
+
+import '../Provider/toggletheme.dart';
 
 class AboutPage extends StatefulWidget {
   const AboutPage({Key? key}) : super(key: key);
@@ -39,7 +42,9 @@ class _AboutPageState extends State<AboutPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.blue,
+      backgroundColor: context.watch<ChangeTheme>().currenttheme
+          ? Colors.blue
+          : Colors.black,
       body: Column(
         children: [
           Padding(

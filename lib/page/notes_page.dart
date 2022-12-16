@@ -1,6 +1,7 @@
 // import 'package:ToDo/widget/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/db/notes_database.dart';
 import 'package:todo_app/model/note.dart';
 import 'package:todo_app/page/edit_note_page.dart';
@@ -8,6 +9,8 @@ import 'package:todo_app/page/note_detail_page.dart';
 import 'package:todo_app/widget/navigation_drawer_widget.dart';
 import 'package:todo_app/widget/note_card_widget.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import '../Provider/toggletheme.dart';
 
 class NotesPage extends StatefulWidget {
   const NotesPage({Key? key}) : super(key: key);
@@ -50,7 +53,9 @@ class _NotesPageState extends State<NotesPage> {
         key: _scaffoldKey,
         endDrawerEnableOpenDragGesture: false,
         drawerEdgeDragWidth: MediaQuery.of(context).size.width / 2,
-        backgroundColor: Colors.blue[400],
+        backgroundColor: context.watch<ChangeTheme>().currenttheme
+            ? Colors.blue[400]
+            : Color.fromRGBO(30, 30, 30, 225),
         body: WillPopScope(
           onWillPop: () async {
             final difference = DateTime.now().difference(timeBackPressed);
@@ -78,7 +83,7 @@ class _NotesPageState extends State<NotesPage> {
                   },
                   // _scaffoldKey.currentState?.openDrawer(),
                   child: Row(
-                    children: const [
+                    children: [
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 30),
                         child: SizedBox(
@@ -96,6 +101,20 @@ class _NotesPageState extends State<NotesPage> {
                             fontWeight: FontWeight.bold,
                             fontSize: 27,
                           )),
+                      Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 30.0),
+                        child: GestureDetector(
+                            onTap: () => {
+                                  context.read<ChangeTheme>().toggletheme(),
+                                },
+                            child: Icon(
+                              context.watch<ChangeTheme>().currenttheme
+                                  ? Icons.dark_mode
+                                  : Icons.light_mode,
+                              color: Colors.white,
+                            )),
+                      )
                     ],
                   ),
                 ),
@@ -105,7 +124,9 @@ class _NotesPageState extends State<NotesPage> {
                   padding: const EdgeInsets.all(20),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: context.watch<ChangeTheme>().currenttheme
+                          ? Colors.white
+                          : Color.fromRGBO(30, 30, 30, 40),
                       borderRadius: const BorderRadius.all(Radius.circular(20)),
                       boxShadow: [
                         BoxShadow(
@@ -120,10 +141,15 @@ class _NotesPageState extends State<NotesPage> {
                       child: isLoading
                           ? const CircularProgressIndicator()
                           : notes.isEmpty
-                              ? const Text(
+                              ? Text(
                                   'Create New Notes',
                                   style: TextStyle(
-                                      color: Colors.black, fontSize: 24),
+                                      color: context
+                                              .watch<ChangeTheme>()
+                                              .currenttheme
+                                          ? Colors.black
+                                          : Colors.white,
+                                      fontSize: 24),
                                 )
                               : Padding(
                                   padding: const EdgeInsets.only(
@@ -152,7 +178,9 @@ class _NotesPageState extends State<NotesPage> {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                      color: Colors.blue,
+                      color: context.watch<ChangeTheme>().currenttheme
+                          ? Colors.blue
+                          : Colors.black,
                       borderRadius: BorderRadius.circular(10)),
                   height: 50,
                   width: 50,

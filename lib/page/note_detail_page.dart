@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/db/notes_database.dart';
 import 'package:todo_app/model/note.dart';
 import 'package:todo_app/page/edit_note_page.dart';
 import 'package:todo_app/page/notes_page.dart';
+
+import '../Provider/toggletheme.dart';
 
 class NoteDetailPage extends StatefulWidget {
   final int noteId;
@@ -37,16 +40,20 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: context.watch<ChangeTheme>().currenttheme
+            ? Colors.white
+            : Color.fromRGBO(30, 30, 30, 40),
         appBar: AppBar(
           toolbarHeight: 100,
           leading: GestureDetector(
             onTap: () => {Navigator.of(context).pop()},
-            child: const Padding(
+            child: Padding(
               padding: EdgeInsets.only(left: 20, top: 40.0),
               child: Icon(
                 Icons.keyboard_arrow_left_sharp,
-                color: Colors.black,
+                color: context.watch<ChangeTheme>().currenttheme
+                    ? Colors.black
+                    : Colors.white,
                 size: 40,
               ),
             ),
@@ -73,8 +80,10 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
                       padding: const EdgeInsets.only(top: 20.0, bottom: 20),
                       child: Text(
                         note.title,
-                        style: const TextStyle(
-                          color: Colors.black,
+                        style: TextStyle(
+                          color: context.watch<ChangeTheme>().currenttheme
+                              ? Colors.black
+                              : Colors.white,
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
                         ),
@@ -87,8 +96,11 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
                         children: [
                           Text(
                             note.description,
-                            style: const TextStyle(
-                                color: Colors.black, fontSize: 18),
+                            style: TextStyle(
+                                color: context.watch<ChangeTheme>().currenttheme
+                                    ? Colors.black
+                                    : Colors.white,
+                                fontSize: 18),
                           )
                         ],
                       ),

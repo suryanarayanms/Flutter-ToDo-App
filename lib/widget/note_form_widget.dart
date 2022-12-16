@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../Provider/toggletheme.dart';
 
 class NoteFormWidget extends StatelessWidget {
   final bool? isImportant;
@@ -24,7 +27,9 @@ class NoteFormWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: context.watch<ChangeTheme>().currenttheme
+            ? Colors.white
+            : Color.fromRGBO(30, 30, 30, 40),
         body: Padding(
           padding: const EdgeInsets.only(top: 16, left: 30, right: 30),
           child: Column(

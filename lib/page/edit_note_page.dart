@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/db/notes_database.dart';
 import 'package:todo_app/model/note.dart';
 import 'package:todo_app/widget/note_form_widget.dart';
+
+import '../Provider/toggletheme.dart';
 
 class AddEditNotePage extends StatefulWidget {
   final Note? note;
@@ -45,7 +48,9 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
         },
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.white,
+            backgroundColor: context.watch<ChangeTheme>().currenttheme
+                ? Colors.white
+                : const Color.fromRGBO(30, 30, 30, 40),
             toolbarHeight: 100,
             // actions: [buildButton()],
             leading: GestureDetector(
@@ -56,11 +61,13 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
                 else
                   {Navigator.of(context).pop()}
               },
-              child: const Padding(
+              child: Padding(
                 padding: EdgeInsets.only(left: 20, top: 40.0),
                 child: Icon(
                   Icons.keyboard_arrow_left_sharp,
-                  color: Colors.black,
+                  color: context.watch<ChangeTheme>().currenttheme
+                      ? Colors.black
+                      : Colors.white,
                   size: 40,
                 ),
               ),
@@ -91,7 +98,9 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                        color: Colors.blue,
+                        color: context.watch<ChangeTheme>().currenttheme
+                            ? Colors.blue
+                            : Colors.black,
                         borderRadius: BorderRadius.circular(10)),
                     height: 50,
                     width: 50,
