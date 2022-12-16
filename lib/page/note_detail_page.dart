@@ -42,13 +42,13 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: context.watch<ChangeTheme>().currenttheme
             ? Colors.white
-            : Color.fromRGBO(30, 30, 30, 40),
+            : const Color.fromRGBO(30, 30, 30, 40),
         appBar: AppBar(
           toolbarHeight: 100,
           leading: GestureDetector(
             onTap: () => {Navigator.of(context).pop()},
             child: Padding(
-              padding: EdgeInsets.only(left: 20, top: 40.0),
+              padding: const EdgeInsets.only(left: 20, top: 40.0),
               child: Icon(
                 Icons.keyboard_arrow_left_sharp,
                 color: context.watch<ChangeTheme>().currenttheme
@@ -77,16 +77,20 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 20.0, bottom: 20),
-                      child: Text(
-                        note.title,
-                        style: TextStyle(
-                          color: context.watch<ChangeTheme>().currenttheme
-                              ? Colors.black
-                              : Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      padding: const EdgeInsets.only(top: 40.0, bottom: 20),
+                      child: Row(
+                        children: [
+                          Text(
+                            note.title,
+                            style: TextStyle(
+                              color: context.watch<ChangeTheme>().currenttheme
+                                  ? Colors.black
+                                  : Colors.white,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     Expanded(
@@ -128,7 +132,9 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
               width: 70.0,
               height: 50.0,
               decoration: BoxDecoration(
-                color: Colors.blue[400],
+                color: context.watch<ChangeTheme>().currenttheme
+                    ? Colors.blue[400]
+                    : Colors.black,
                 borderRadius: BorderRadius.circular(15.0),
                 // boxShadow: [
                 //   BoxShadow(
@@ -180,7 +186,9 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
           width: 70.0,
           height: 50.0,
           decoration: BoxDecoration(
-            color: Colors.red[400],
+            color: context.watch<ChangeTheme>().currenttheme
+                ? Colors.red[400]
+                : Colors.red,
             borderRadius: BorderRadius.circular(15.0),
           ),
           child: IconButton(

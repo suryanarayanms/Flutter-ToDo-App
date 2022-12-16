@@ -50,7 +50,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
           appBar: AppBar(
             backgroundColor: context.watch<ChangeTheme>().currenttheme
                 ? Colors.white
-                : const Color.fromRGBO(30, 30, 30, 40),
+                : const Color.fromRGBO(30, 30, 30, 1),
             toolbarHeight: 100,
             // actions: [buildButton()],
             leading: GestureDetector(
@@ -62,7 +62,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
                   {Navigator.of(context).pop()}
               },
               child: Padding(
-                padding: EdgeInsets.only(left: 20, top: 40.0),
+                padding: const EdgeInsets.only(left: 20, top: 40.0),
                 child: Icon(
                   Icons.keyboard_arrow_left_sharp,
                   color: context.watch<ChangeTheme>().currenttheme

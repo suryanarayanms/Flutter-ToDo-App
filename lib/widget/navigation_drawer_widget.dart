@@ -51,7 +51,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
       child: Material(
         color: context.watch<ChangeTheme>().currenttheme
             ? Colors.white
-            : Colors.black,
+            : const Color.fromRGBO(30, 30, 30, 1),
         child: Column(
           children: <Widget>[
             Expanded(

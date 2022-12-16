@@ -25,6 +25,8 @@ class _NotesPageState extends State<NotesPage> {
   DateTime timeBackPressed = DateTime.now();
   bool isLoading = false;
 
+  late bool theee;
+
   @override
   void initState() {
     super.initState();
@@ -52,10 +54,10 @@ class _NotesPageState extends State<NotesPage> {
         drawer: const NavigationDrawerWidget(),
         key: _scaffoldKey,
         endDrawerEnableOpenDragGesture: false,
-        drawerEdgeDragWidth: MediaQuery.of(context).size.width / 2,
+        drawerEdgeDragWidth: MediaQuery.of(context).size.width / 4,
         backgroundColor: context.watch<ChangeTheme>().currenttheme
             ? Colors.blue[400]
-            : Color.fromRGBO(30, 30, 30, 225),
+            : const Color.fromRGBO(30, 30, 30, 225),
         body: WillPopScope(
           onWillPop: () async {
             final difference = DateTime.now().difference(timeBackPressed);
@@ -84,7 +86,7 @@ class _NotesPageState extends State<NotesPage> {
                   // _scaffoldKey.currentState?.openDrawer(),
                   child: Row(
                     children: [
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 30),
                         child: SizedBox(
                           height: 30,
@@ -95,18 +97,21 @@ class _NotesPageState extends State<NotesPage> {
                           ),
                         ),
                       ),
-                      Text('Notes',
+                      const Text('Notes',
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                             fontSize: 27,
                           )),
-                      Spacer(),
+                      const Spacer(),
                       Padding(
                         padding: const EdgeInsets.only(right: 30.0),
                         child: GestureDetector(
                             onTap: () => {
                                   context.read<ChangeTheme>().toggletheme(),
+                                  theee =
+                                      context.read<ChangeTheme>().currenttheme,
+                                  print('$theee'),
                                 },
                             child: Icon(
                               context.watch<ChangeTheme>().currenttheme
@@ -126,7 +131,7 @@ class _NotesPageState extends State<NotesPage> {
                     decoration: BoxDecoration(
                       color: context.watch<ChangeTheme>().currenttheme
                           ? Colors.white
-                          : Color.fromRGBO(30, 30, 30, 40),
+                          : const Color.fromRGBO(30, 30, 30, 40),
                       borderRadius: const BorderRadius.all(Radius.circular(20)),
                       boxShadow: [
                         BoxShadow(

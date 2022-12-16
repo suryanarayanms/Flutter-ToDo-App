@@ -29,7 +29,9 @@ class NoteCardWidget extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(20)),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.1),
+              color: context.watch<ChangeTheme>().currenttheme
+                  ? Colors.black.withOpacity(0.1)
+                  : Colors.transparent,
               spreadRadius: 2,
               blurRadius: 10,
               offset: const Offset(0, 2),
@@ -73,10 +75,6 @@ class NoteCardWidget extends StatelessWidget {
                 // fontWeight: FontWeight.bold,
               ),
             ),
-            const Text(
-              "...",
-              style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
-            )
           ],
         ),
       ),
