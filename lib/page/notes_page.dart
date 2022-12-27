@@ -109,9 +109,6 @@ class _NotesPageState extends State<NotesPage> {
                         child: GestureDetector(
                             onTap: () => {
                                   context.read<ChangeTheme>().toggletheme(),
-                                  theee =
-                                      context.read<ChangeTheme>().currenttheme,
-                                  print('$theee'),
                                 },
                             child: Icon(
                               context.watch<ChangeTheme>().currenttheme

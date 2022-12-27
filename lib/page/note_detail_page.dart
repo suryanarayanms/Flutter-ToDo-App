@@ -42,7 +42,7 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: context.watch<ChangeTheme>().currenttheme
             ? Colors.white
-            : const Color.fromRGBO(30, 30, 30, 40),
+            : Colors.black,
         appBar: AppBar(
           toolbarHeight: 100,
           leading: GestureDetector(
@@ -75,31 +75,32 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
                 padding: const EdgeInsets.only(
                     top: 0, left: 30, right: 30, bottom: 0),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 40.0, bottom: 20),
-                      child: Row(
-                        children: [
-                          Text(
-                            note.title,
-                            style: TextStyle(
-                              color: context.watch<ChangeTheme>().currenttheme
-                                  ? Colors.black
-                                  : Colors.white,
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
+                      child: SelectableText(
+                        note.title,
+                        style: TextStyle(
+                          color: context.watch<ChangeTheme>().currenttheme
+                              ? Colors.black
+                              : Colors.white,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        toolbarOptions:
+                            const ToolbarOptions(copy: true, selectAll: true),
                       ),
                     ),
                     Expanded(
                       child: ListView(
                         physics: const BouncingScrollPhysics(),
-                        padding: const EdgeInsets.symmetric(vertical: 8),
+                        // padding: const EdgeInsets.symmetric(vertical: 8),
                         children: [
-                          Text(
+                          SelectableText(
                             note.description,
+                            toolbarOptions: const ToolbarOptions(
+                                copy: true, selectAll: true),
                             style: TextStyle(
                                 color: context.watch<ChangeTheme>().currenttheme
                                     ? Colors.black
@@ -134,7 +135,7 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
               decoration: BoxDecoration(
                 color: context.watch<ChangeTheme>().currenttheme
                     ? Colors.blue[400]
-                    : Colors.black,
+                    : const Color.fromRGBO(30, 30, 30, 40),
                 borderRadius: BorderRadius.circular(15.0),
                 // boxShadow: [
                 //   BoxShadow(
@@ -182,58 +183,66 @@ class _NoteDetailPageState extends State<NoteDetailPage> {
                     )
                   ],
                 )),
-        child: Container(
-          width: 70.0,
-          height: 50.0,
-          decoration: BoxDecoration(
-            color: context.watch<ChangeTheme>().currenttheme
-                ? Colors.red[400]
-                : Colors.red,
-            borderRadius: BorderRadius.circular(15.0),
-          ),
-          child: IconButton(
-            icon: const Icon(
-              Icons.delete,
+        child: GestureDetector(
+          onTap: () async {
+            await NotesDatabase.instance.delete(widget.noteId);
+
+            Navigator.of(context).pop();
+          },
+          child: Container(
+            width: 70.0,
+            height: 50.0,
+            decoration: BoxDecoration(
+              color: context.watch<ChangeTheme>().currenttheme
+                  ? Colors.red[400]
+                  : const Color.fromRGBO(30, 30, 30, 40),
+              borderRadius: BorderRadius.circular(15.0),
+              // boxShadow: [
+              //   BoxShadow(
+              //     color: Colors.black.withOpacity(0.2),
+              //     spreadRadius: 1,
+              //     blurRadius: 10,
+              //     offset: const Offset(0, 2),
+              //   )
+              // ],
+            ),
+            child: const Icon(
+              Icons.delete_rounded,
               color: Colors.white,
             ),
-
-            onPressed: () async {
-              await NotesDatabase.instance.delete(widget.noteId);
-
-              Navigator.of(context).pop();
-            },
-            // showDialog(
-            //     context: context,
-            //     builder: (context) => AlertDialog(
-            //           title: const Text("Delete Note"),
-            //           content:
-            //               const Text("This note will be deleted permanently"),
-            //           actions: [
-            //             TextButton(
-            //                 onPressed: () => Navigator.pop(context),
-            //                 child: const Text("CANCEL")),
-            //             TextButton(
-            //               onPressed: () async {
-            //                 await NotesDatabase.instance
-            //                     .delete(widget.noteId);
-
-            //                 Navigator.of(context).pop();
-            //               },
-            //               child: const Text(
-            //                 "DELETE",
-            //                 style: TextStyle(color: Colors.red),
-            //               ),
-            //             )
-            //           ],
-            //         ));
-            // },
-
-            // onPressed: () async {
-            //   await NotesDatabase.instance.delete(widget.noteId);
-
-            //   Navigator.of(context).pop();
-            // },
           ),
+
+          // showDialog(
+          //     context: context,
+          //     builder: (context) => AlertDialog(
+          //           title: const Text("Delete Note"),
+          //           content:
+          //               const Text("This note will be deleted permanently"),
+          //           actions: [
+          //             TextButton(
+          //                 onPressed: () => Navigator.pop(context),
+          //                 child: const Text("CANCEL")),
+          //             TextButton(
+          //               onPressed: () async {
+          //                 await NotesDatabase.instance
+          //                     .delete(widget.noteId);
+
+          //                 Navigator.of(context).pop();
+          //               },
+          //               child: const Text(
+          //                 "DELETE",
+          //                 style: TextStyle(color: Colors.red),
+          //               ),
+          //             )
+          //           ],
+          //         ));
+          // },
+
+          // onPressed: () async {
+          //   await NotesDatabase.instance.delete(widget.noteId);
+
+          //   Navigator.of(context).pop();
+          // },
         ),
       );
 }

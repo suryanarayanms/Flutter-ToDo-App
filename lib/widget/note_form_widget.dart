@@ -29,7 +29,7 @@ class NoteFormWidget extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: context.watch<ChangeTheme>().currenttheme
             ? Colors.white
-            : const Color.fromRGBO(30, 30, 30, 1),
+            : Colors.black,
         body: Padding(
           padding: const EdgeInsets.only(top: 16, left: 30, right: 30),
           child: Column(
@@ -47,7 +47,7 @@ class NoteFormWidget extends StatelessWidget {
                       ? Colors.black
                       : Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 24,
+                  fontSize: 30,
                 ),
                 decoration: InputDecoration(
                   border: InputBorder.none,

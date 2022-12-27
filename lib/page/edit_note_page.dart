@@ -50,7 +50,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
           appBar: AppBar(
             backgroundColor: context.watch<ChangeTheme>().currenttheme
                 ? Colors.white
-                : const Color.fromRGBO(30, 30, 30, 1),
+                : Colors.black,
             toolbarHeight: 100,
             // actions: [buildButton()],
             leading: GestureDetector(
@@ -100,7 +100,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
                     decoration: BoxDecoration(
                         color: context.watch<ChangeTheme>().currenttheme
                             ? Colors.blue
-                            : Colors.black,
+                            : const Color.fromRGBO(30, 30, 30, 40),
                         borderRadius: BorderRadius.circular(10)),
                     height: 50,
                     width: 50,
